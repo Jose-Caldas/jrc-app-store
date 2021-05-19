@@ -1,6 +1,11 @@
 import { Box, Icon, Stack, Text, Flex, Link } from "@chakra-ui/react";
 import React from "react";
-import { FiPackage, FiUsers, FiShoppingBag } from "react-icons/fi";
+import {
+  FiPackage,
+  FiUsers,
+  FiShoppingBag,
+  FiShoppingCart,
+} from "react-icons/fi";
 
 export function SideBar() {
   return (
@@ -32,6 +37,12 @@ export function SideBar() {
           <Link href="/orders" display="flex" alignItems="center">
             <Icon as={FiShoppingBag} />
             <Text ml="16px">Orders</Text>
+          </Link>
+        </Flex>
+        <Flex alignItems="center">
+          <Link href="/cart" display="flex" alignItems="center">
+            <Icon as={FiShoppingCart} />
+            <Text ml="16px">Cart</Text>
           </Link>
         </Flex>
       </Stack>

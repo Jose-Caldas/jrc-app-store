@@ -1,11 +1,11 @@
 import { Flex, Text, Box } from "@chakra-ui/layout";
 
 interface BoxOrderProps {
-  value: number;
+  value: string;
   dated_at: string;
 }
 
-export function BoxOrder({ value, dated_at }) {
+export function BoxOrder({ value, dated_at }: BoxOrderProps) {
   return (
     <Box width="740px" height="112px" bg="#FFFFFF" pt="27px" pl="22px">
       <Text fontWeight="600" fontSize="18px" mb="10px">
