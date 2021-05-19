@@ -9,7 +9,7 @@ export function SideBar() {
       width="283px"
       height="100vh"
       bg="#FFFFFF"
-      mr="8"
+      mr="74px"
       pl="8"
       fontSize="18px"
       fontWeight="600"
@@ -17,20 +17,20 @@ export function SideBar() {
     >
       <Stack spacing="12" alignItems="flex-start" pt="163px">
         <Flex alignItems="center">
-          <Icon as={FiPackage} />
-          <Link href="/products">
+          <Link href="/products" display="flex" alignItems="center">
+            <Icon as={FiPackage} />
             <Text ml="16px">Products</Text>
           </Link>
         </Flex>
         <Flex alignItems="center">
-          <Icon as={FiUsers} />
-          <Link href="/customers">
+          <Link href="/customers" display="flex" alignItems="center">
+            <Icon as={FiUsers} />
             <Text ml="16px">Customers</Text>
           </Link>
         </Flex>
         <Flex alignItems="center">
-          <Icon as={FiShoppingBag} />
-          <Link href="/orders">
+          <Link href="/orders" display="flex" alignItems="center">
+            <Icon as={FiShoppingBag} />
             <Text ml="16px">Orders</Text>
           </Link>
         </Flex>
