@@ -17,12 +17,17 @@ import { Input } from "../components/Form/Input";
 
 export default function Registration() {
   return (
-    <Flex align="center" justify="center" width="100vw" height="100vh">
+    <Flex
+      align="center"
+      justify="center"
+      width="100vw"
+      height="100vh"
+      bg="#FFFFFF"
+    >
       <Box width="800px">
-        <Heading size="lg" fontWeight="600" textAlign="center" mb="59px">
+        <Text fontSize="30px" fontWeight="600" textAlign="center" mb="59px">
           Create my account
-        </Heading>
-        {/* <Divider my="6" borderColor="gray.400" /> */}
+        </Text>
 
         <VStack spacing="4">
           <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
