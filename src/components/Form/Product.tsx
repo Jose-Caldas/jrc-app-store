@@ -1,5 +1,6 @@
 import { Box, Text, Flex, Button, Icon } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import { CartButton } from "./CartButton";
 
 interface ProductProps {
   name: string;
@@ -41,6 +42,7 @@ export function Product({ name, price }: ProductProps) {
           </Button>
         </Flex>
       </Flex>
+      <CartButton />
     </Box>
   );
 }

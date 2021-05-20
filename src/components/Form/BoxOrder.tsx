@@ -11,7 +11,7 @@ export function BoxOrder({ value, dated_at }: BoxOrderProps) {
       <Text fontWeight="600" fontSize="18px" mb="10px">
         {value}
       </Text>
-      <Text fontWeight="400" fontSize="12px">
+      <Text fontWeight="400" fontSize="14px" color="#8886A5">
         {dated_at}
       </Text>
     </Box>
