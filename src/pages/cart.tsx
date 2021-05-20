@@ -11,7 +11,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle, FiShoppingCart } from "react-icons/fi";
-import { CartButton } from "../components/Form/CartButton";
+import { CartLink } from "../components/Form/CartLink";
 import { SideBar } from "../components/SideBar";
 
 export default function Cart() {
@@ -29,6 +29,7 @@ export default function Cart() {
           flexDirection="column"
           bg="#FFFFFF"
           justifyContent="space-between"
+          p="10px"
         >
           <Table colorScheme="purple" bg="#FFFFFF" borderColor="#8886A5">
             <Tbody>
@@ -37,10 +38,14 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td textAlign="center">
-                  <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td
                   fontSize="18px"
@@ -56,10 +61,14 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td textAlign="center">
-                  <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td
                   fontSize="18px"
@@ -75,10 +84,14 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td textAlign="center">
-                  <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  <Button bg="transparent">
+                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                  </Button>
                 </Td>
                 <Td
                   fontSize="18px"
@@ -106,7 +119,7 @@ export default function Cart() {
           </Button>
         </Flex>
       </Flex>
-      <CartButton />
+      <CartLink />
     </Flex>
   );
 }

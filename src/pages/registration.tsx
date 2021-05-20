@@ -50,6 +50,7 @@ export default function Registration() {
 
         <Flex>
           <Button
+            type="submit"
             width="377px"
             marginX="auto"
             mt="59px"
@@ -63,7 +64,7 @@ export default function Registration() {
         </Flex>
         <Flex>
           <Link
-            href="http://localhost:3000/"
+            href="/orders"
             marginX="auto"
             color="#577BF9"
             fontSize="14px"

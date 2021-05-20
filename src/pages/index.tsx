@@ -32,7 +32,7 @@ export default function SignIn() {
           borderRadius="4px"
           size="lg"
         >
-          Entrar
+          Sign in
         </Button>
         <Link
           href="/registration"

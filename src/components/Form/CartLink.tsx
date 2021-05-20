@@ -1,16 +1,18 @@
 import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
+import { Link } from "@chakra-ui/layout";
 import { FiShoppingCart } from "react-icons/fi";
 
-export function CartButton() {
+export function CartLink() {
   return (
-    <Button
+    <Link
+      href="/cart"
       position="absolute"
-      top="40px"
+      top="50px"
       right="50px"
-      bg="transparent"
-      leftIcon={<Icon fontSize="25px" as={FiShoppingCart} />}
       _hover={{ color: "#577BF9" }}
-    ></Button>
+    >
+      <Icon as={FiShoppingCart} fontSize="25px" />
+    </Link>
   );
 }
