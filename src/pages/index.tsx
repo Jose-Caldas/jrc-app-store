@@ -1,5 +1,6 @@
-import { Button, Flex, Link, Stack, Text } from "@chakra-ui/react";
-import { Input } from "../components/Form/Input";
+import { Flex, Link, Stack, Text } from "@chakra-ui/react";
+import { Button } from "../components/Button";
+import { Input } from "../components/Input";
 
 export default function SignIn() {
   return (
@@ -24,16 +25,8 @@ export default function SignIn() {
           <Input name="email" type="email" label="E-mail" />
           <Input name="password" type="password" label="Password" />
         </Stack>
-        <Button
-          type="submit"
-          mt="69px"
-          colorScheme="blue"
-          color="#FFFFFF"
-          borderRadius="4px"
-          size="lg"
-        >
-          Sign in
-        </Button>
+
+        <Button title="Sign in" />
         <Link
           href="/registration"
           textAlign="center"

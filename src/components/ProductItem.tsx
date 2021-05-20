@@ -1,24 +1,27 @@
-import { Box, Text, Flex, Button, Icon, SimpleGrid } from "@chakra-ui/react";
+import { Box, Text, Flex } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
+import { SelectQuanty } from "./SelectQuanty";
 
 interface ProductProps {
   name: string;
   price: string;
 }
 
-export function Product({ name, price }: ProductProps) {
+export function ProductItem({ name, price }: ProductProps) {
   return (
-    <Flex wrap="wrap">
+    <Flex>
       <Box
         display="flex"
         flexDirection="column"
         justifyContent="space-between"
+        w="100%"
         width="267px"
         height="245px"
         bg="#FFFFFF"
         borderRadius="9px"
         mr="8"
+        mt="8"
       >
         <CartLink />
         <Flex flexDirection="column">
@@ -37,12 +40,8 @@ export function Product({ name, price }: ProductProps) {
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">
           <Flex justify="space-evenly" width="100%" align="center">
-            <Button bg="transparent">
-              <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
-            </Button>
-            <Button bg="transparent">
-              <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-            </Button>
+            <SelectQuanty color="#F97575" icon={FiMinusCircle} />
+            <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
           </Flex>
         </Flex>
       </Box>

@@ -1,5 +1,5 @@
 import { Flex, Text, Stack, SimpleGrid, Box } from "@chakra-ui/layout";
-import { Product } from "../components/Form/Product";
+import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 
 export default function Products() {
@@ -7,15 +7,16 @@ export default function Products() {
     <Flex>
       <SideBar />
       <Flex flexDirection="column" mt="131px">
-        <Text fontSize="30px" fontWeight="600" mb="22px">
+        <Text fontSize="30px" fontWeight="600" mb="">
           Products
         </Text>
-        <Box display="flex" wrap="wrap">
-          <Product name="Shoes" price="$ 42,00" />
-          <Product name="T-shirt" price="$ 32,00" />
-          <Product name="Pants" price="$ 27,00" />
-          <Product name="Shorts" price="$ 33,00" />
-        </Box>
+
+        <Flex wrap="wrap">
+          <ProductItem name="Shoes" price="$ 42,00" />
+          <ProductItem name="T-shirt" price="$ 32,00" />
+          <ProductItem name="Pants" price="$ 27,00" />
+          <ProductItem name="Shorts" price="$ 33,00" />
+        </Flex>
       </Flex>
     </Flex>
   );

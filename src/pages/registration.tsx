@@ -1,19 +1,6 @@
-import {
-  Flex,
-  HStack,
-  Text,
-  Stack,
-  FormLabel,
-  SimpleGrid,
-  FormControl,
-  Box,
-  Heading,
-  Divider,
-  VStack,
-  Button,
-  Link,
-} from "@chakra-ui/react";
-import { Input } from "../components/Form/Input";
+import { Flex, Text, SimpleGrid, Box, VStack, Link } from "@chakra-ui/react";
+import { Button } from "../components/Button";
+import { Input } from "../components/Input";
 
 export default function Registration() {
   return (
@@ -48,19 +35,8 @@ export default function Registration() {
           </>
         </VStack>
 
-        <Flex>
-          <Button
-            type="submit"
-            width="377px"
-            marginX="auto"
-            mt="59px"
-            colorScheme="blue"
-            color="#FFFFFF"
-            borderRadius="4px"
-            size="lg"
-          >
-            Submit
-          </Button>
+        <Flex align="center" justify="center">
+          <Button title="Submit" />
         </Flex>
         <Flex>
           <Link

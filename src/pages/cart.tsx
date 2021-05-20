@@ -11,7 +11,8 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle, FiShoppingCart } from "react-icons/fi";
-import { CartLink } from "../components/Form/CartLink";
+import { CartLink } from "../components/CartLink";
+import { SelectQuanty } from "../components/SelectQuanty";
 import { SideBar } from "../components/SideBar";
 
 export default function Cart() {
@@ -38,14 +39,10 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Button bg="transparent">
-                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
                 </Td>
                 <Td textAlign="center">
-                  <Button bg="transparent">
-                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
                 </Td>
                 <Td
                   fontSize="18px"
@@ -61,14 +58,10 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Button bg="transparent">
-                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
                 </Td>
                 <Td textAlign="center">
-                  <Button bg="transparent">
-                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
                 </Td>
                 <Td
                   fontSize="18px"
@@ -84,14 +77,10 @@ export default function Cart() {
                   Shoes
                 </Td>
                 <Td textAlign="end">
-                  <Button bg="transparent">
-                    <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
                 </Td>
                 <Td textAlign="center">
-                  <Button bg="transparent">
-                    <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-                  </Button>
+                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
                 </Td>
                 <Td
                   fontSize="18px"

@@ -1,6 +1,6 @@
 import { Flex, Stack, Text } from "@chakra-ui/layout";
-import { BoxOrder } from "../components/Form/BoxOrder";
-import { CartLink } from "../components/Form/CartLink";
+import { OrderItem } from "../components/OrderItem";
+import { CartLink } from "../components/CartLink";
 import { SideBar } from "../components/SideBar";
 
 export default function Orders() {
@@ -13,8 +13,8 @@ export default function Orders() {
           Orders
         </Text>
         <Stack spacing="6">
-          <BoxOrder value="300,00" dated_at="19/05/2021" />
-          <BoxOrder value="300,00" dated_at="19/05/2021" />
+          <OrderItem value="300,00" dated_at="19/05/2021" />
+          <OrderItem value="300,00" dated_at="19/05/2021" />
         </Stack>
       </Flex>
     </Flex>

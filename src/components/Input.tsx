@@ -20,7 +20,8 @@ export function Input({ name, label, ...rest }: InputProps) {
         bg="#E3E3F2"
         borderRadius="4px"
         variant="filled"
-        size="lg"
+        width="379px"
+        height="50px"
         {...rest}
       ></ChackraInput>
     </FormControl>
