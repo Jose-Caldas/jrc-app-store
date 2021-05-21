@@ -3,17 +3,27 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useForm } from "react-hook-form";
 
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 type SignInFormData = {
   email: string;
   password: string;
 };
 
-export default function SignIn() {
-  const { register, handleSubmit, formState } = useForm();
+const SignInFormSchema = yup.object().shape({
+  email: yup.string().required().email(),
+  password: yup.string().required(),
+});
 
-  const handleSignIn = async (data: SignInFormData) => {
+export default function SignIn() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(SignInFormSchema),
+  });
+
+  const handleSignIn = async (values: SignInFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
+    console.log(values);
   };
 
   const { errors } = formState;
@@ -44,14 +54,14 @@ export default function SignIn() {
             name="email"
             type="email"
             label="E-mail"
-            {...register("email", { required: "E-mail obrigatório" })}
+            {...register("email")}
             error={errors.email}
           />
           <Input
             name="password"
             type="password"
             label="Password"
-            {...register("password", { required: "Password obrigatório" })}
+            {...register("password")}
             error={errors.password}
           />
         </Stack>
