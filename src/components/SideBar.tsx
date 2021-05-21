@@ -6,6 +6,7 @@ import {
   FiShoppingBag,
   FiShoppingCart,
 } from "react-icons/fi";
+import { ActiveLink } from "./ActiveLink";
 
 export function SideBar() {
   return (

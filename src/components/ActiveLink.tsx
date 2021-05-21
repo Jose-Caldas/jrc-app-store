@@ -1,5 +1,6 @@
 import Link, { LinkProps } from "next/link";
 import { cloneElement, ReactElement, ReactNode } from "react";
+
 interface ActiveLinkProps extends LinkProps {
   children: ReactElement;
 }
