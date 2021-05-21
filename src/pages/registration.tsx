@@ -13,6 +13,7 @@ type RegistrationFormData = {
   gender: string;
   email: string;
   password: string;
+  password_confirmation: string;
 };
 
 const RegistrationFormSchema = yup.object().shape({
@@ -20,11 +21,14 @@ const RegistrationFormSchema = yup.object().shape({
   surname: yup.string().required(),
   gender: yup.string().required(),
   email: yup.string().required().email(),
-  password: yup.string().required().min(6, "No mínimo 6 caracteres"),
+  password: yup.string().required().min(6, "minimum 6 characters"),
+  password_confirmation: yup
+    .string()
+    .oneOf([null, yup.ref("password")], "passwords must be the same"),
 });
 
 export default function Registration() {
-  const { register, handleSubmit, formState, isLoading } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(RegistrationFormSchema),
   });
 
@@ -81,16 +85,22 @@ export default function Registration() {
               error={errors.email}
             />
           </SimpleGrid>
-          <>
+          <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} width="100%">
             <Input
               name="password"
               type="password"
               label="Password"
-              width="384px"
               {...register("password")}
               error={errors.password}
             />
-          </>
+            <Input
+              name="password_confirmation"
+              type="password"
+              label="Password Confirmation"
+              {...register("password_confirmation")}
+              error={errors.password_confirmation}
+            />
+          </SimpleGrid>
         </VStack>
 
         <Flex align="center" justify="center">
