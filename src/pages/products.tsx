@@ -1,6 +1,6 @@
-import { Flex, Text } from "@chakra-ui/layout";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { api } from "../api";
+import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
@@ -15,10 +15,10 @@ interface ProductsResult {
   products: Array<Product>;
 }
 
-const getProducts = async () => api.get("tags");
+const getProducts = async () => api.get("/product");
 
 export default function Products() {
-  const { data, isLoading } = useQuery("tags", getProducts);
+  const { data, isLoading } = useQuery("product", getProducts);
 
   return (
     <Flex>
@@ -27,19 +27,29 @@ export default function Products() {
         <Text fontSize="30px" fontWeight="600" mb="">
           Products
         </Text>
-        {isLoading && <p>Loading...</p>}
-
-        <Flex wrap="wrap">
-          {data?.data?.products?.map((product) => (
-            <ProductItem
-              key={product.productId}
-              name={product.name}
-              price={product.price}
-            />
-          ))}
-          <ProductItem name="Shoes" price="$42,00" />
-          <ProductItem name="T-shirt" price="$50,00" />
-        </Flex>
+        {isLoading ? (
+          <Flex
+            color="#8886A5"
+            justify="space-between"
+            align="center"
+            mt="20px"
+          >
+            <Spinner />
+            <Text>Loading...</Text>
+          </Flex>
+        ) : (
+          <Flex wrap="wrap">
+            {data?.data?.products?.map((product) => (
+              <ProductItem
+                key={product.productId}
+                name={product.name}
+                price={product.price}
+              />
+            ))}
+            <ProductItem name="Shoes" price="$42,00" />
+            <ProductItem name="T-shirt" price="$50,00" />
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );

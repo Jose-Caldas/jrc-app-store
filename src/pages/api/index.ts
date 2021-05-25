@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://staging.amplifyre.com/",
+  baseURL: "https://e-commerce-b4.herokuapp.com",
 });
