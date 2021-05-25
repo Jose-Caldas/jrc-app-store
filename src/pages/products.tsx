@@ -15,10 +15,19 @@ interface ProductsResult {
   products: Array<Product>;
 }
 
-const getProducts = async () => api.get("/product");
+export async function getProducts(): Promise<Product[]> {
+  const { data } = await api.get("/product");
+  return data;
+}
 
 export default function Products() {
-  const { data, isLoading } = useQuery("product", getProducts);
+  const { data, isLoading, isFetching, error } = useQuery(
+    "product",
+    getProducts,
+    {
+      staleTime: 1000 * 5,
+    }
+  );
 
   return (
     <Flex>
@@ -26,6 +35,9 @@ export default function Products() {
       <Flex flexDirection="column" mt="131px">
         <Text fontSize="30px" fontWeight="600" mb="">
           Products
+          {!isLoading && isFetching && (
+            <Spinner color="#8886A5" size="sm" ml="4" />
+          )}
         </Text>
         {isLoading ? (
           <Flex
@@ -37,9 +49,13 @@ export default function Products() {
             <Spinner />
             <Text>Loading...</Text>
           </Flex>
+        ) : error ? (
+          <Text mt="5" color="#F97575">
+            Falha ao obter os dados
+          </Text>
         ) : (
           <Flex wrap="wrap">
-            {data?.data?.products?.map((product) => (
+            {data.map((product) => (
               <ProductItem
                 key={product.productId}
                 name={product.name}
