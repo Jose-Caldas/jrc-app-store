@@ -13,8 +13,8 @@ export default function Orders() {
           Orders
         </Text>
         <Stack spacing="6">
-          <OrderItem value="300,00" dated_at="19/05/2021" />
-          <OrderItem value="300,00" dated_at="19/05/2021" />
+          <OrderItem value="300,00" date="19/05/2021" />
+          <OrderItem value="300,00" date="19/05/2021" />
         </Stack>
       </Flex>
     </Flex>

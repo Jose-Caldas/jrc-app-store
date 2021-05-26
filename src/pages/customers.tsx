@@ -1,8 +1,12 @@
 import { Flex, Text, Stack } from "@chakra-ui/layout";
+import { useContext } from "react";
 import { OrderItem } from "../components/OrderItem";
 import { SideBar } from "../components/SideBar";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Customers() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Flex>
       <SideBar />
@@ -11,8 +15,8 @@ export default function Customers() {
           Customers
         </Text>
         <Stack spacing="6">
-          <OrderItem value="Julio" dated_at="julio@gmail.com" />
-          <OrderItem value="José" dated_at="jose@gmail.com" />
+          <OrderItem name={user?.name} email={user?.email} />
+          <OrderItem name="Julio" email="julio@gmail.com" />
         </Stack>
       </Flex>
     </Flex>
