@@ -6,7 +6,7 @@ import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 
 type Product = {
-  productId: string;
+  _id: string;
   name: string;
   price: string;
 };
@@ -16,8 +16,8 @@ interface ProductsResult {
 }
 
 export async function getProducts(): Promise<Product[]> {
-  const { data } = await api.get("/product");
-  return data;
+  const response = await api.get("/product");
+  return response.data;
 }
 
 export default function Products() {
@@ -57,13 +57,11 @@ export default function Products() {
           <Flex wrap="wrap">
             {data.map((product) => (
               <ProductItem
-                key={product.productId}
+                key={product._id}
                 name={product.name}
                 price={product.price}
               />
             ))}
-            <ProductItem name="Shoes" price="$42,00" />
-            <ProductItem name="T-shirt" price="$50,00" />
           </Flex>
         )}
       </Flex>
