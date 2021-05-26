@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 
 type RegistrationFormData = {
   name: string;
@@ -38,11 +36,7 @@ export default function Registration() {
 
   const handleRegisterUser = async (values: RegistrationFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    // console.log(values);
   };
-
-  const { SignIn } = useContext(AuthContext);
-  // console.log(SignIn);
 
   return (
     <Flex

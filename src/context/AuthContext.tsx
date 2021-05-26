@@ -1,4 +1,5 @@
 import { createContext, ReactNode } from "react";
+import { api } from "../pages/api";
 
 type SignInCredentials = {
   email: string;
@@ -20,7 +21,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const isAuthenticated = false;
 
   async function SignIn({ email, password }: SignInCredentials) {
-    console.log({ email, password });
+    const response = await api.post("/login", {
+      email,
+      password,
+    });
+    console.log(response.data);
   }
 
   return (
