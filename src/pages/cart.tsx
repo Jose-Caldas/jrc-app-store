@@ -9,13 +9,24 @@ import {
   Tbody,
   Td,
   Button,
+  Link,
 } from "@chakra-ui/react";
-import { FiMinusCircle, FiPlusCircle, FiShoppingCart } from "react-icons/fi";
+import { ReactNode } from "react";
+import { useForm } from "react-hook-form";
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "../components/CartLink";
 import { SelectQuanty } from "../components/SelectQuanty";
 import { SideBar } from "../components/SideBar";
 
-export default function Cart() {
+interface CartProps {
+  cart_item: string;
+
+  item_price: number;
+  total: number;
+}
+
+export default function Cart({ cart_item, item_price, total }: CartProps) {
+  const { formState } = useForm();
   return (
     <Flex position="relative">
       <SideBar />
@@ -36,7 +47,7 @@ export default function Cart() {
             <Tbody>
               <Tr width="100%">
                 <Td fontSize="24px" fontWeight="600">
-                  Shoes
+                  {cart_item}
                 </Td>
                 <Td textAlign="end">
                   <SelectQuanty color="#F97575" icon={FiMinusCircle} />
@@ -50,45 +61,7 @@ export default function Cart() {
                   color="#8886A5"
                   textAlign="end"
                 >
-                  $ 42,00
-                </Td>
-              </Tr>
-              <Tr>
-                <Td fontSize="24px" fontWeight="600">
-                  Shoes
-                </Td>
-                <Td textAlign="end">
-                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
-                </Td>
-                <Td textAlign="center">
-                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
-                </Td>
-                <Td
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#8886A5"
-                  textAlign="end"
-                >
-                  $ 42,00
-                </Td>
-              </Tr>
-              <Tr>
-                <Td fontSize="24px" fontWeight="600">
-                  Shoes
-                </Td>
-                <Td textAlign="end">
-                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
-                </Td>
-                <Td textAlign="center">
-                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
-                </Td>
-                <Td
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#8886A5"
-                  textAlign="end"
-                >
-                  $ 42,00
+                  {item_price}
                 </Td>
               </Tr>
             </Tbody>
@@ -98,14 +71,21 @@ export default function Cart() {
               Total
             </Text>
             <Text fontSize="24px" fontWeight="600" pb="22px">
-              $126
+              {total}
             </Text>
           </Flex>
         </Box>
         <Flex justify="flex-end" mt="46px">
-          <Button type="submit" colorScheme="blue" width="195px">
-            Create Order
-          </Button>
+          <Link href="/orders">
+            <Button
+              type="submit"
+              colorScheme="blue"
+              width="195px"
+              isLoading={formState.isSubmitting}
+            >
+              Create Order
+            </Button>
+          </Link>
         </Flex>
       </Flex>
       <CartLink />

@@ -1,15 +1,22 @@
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, Link } from "@chakra-ui/react";
+import { setCookie } from "nookies";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
 import { SelectQuanty } from "./SelectQuanty";
+
+setCookie(undefined, "cart-product", "cookie-value", {
+  maxAge: 60 * 60 * 24 * 30, //30days
+  path: "/cart",
+});
 
 export interface ProductProps {
   _id?: string;
   name: string;
   price: number;
+  total?: number;
 }
 
-export function ProductItem({ name, price, _id }: ProductProps) {
+export function ProductItem({ name, price, _id, total }: ProductProps) {
   return (
     <Flex>
       <Box
@@ -43,6 +50,9 @@ export function ProductItem({ name, price, _id }: ProductProps) {
           <Flex justify="space-evenly" width="100%" align="center">
             <SelectQuanty color="#F97575" icon={FiMinusCircle} />
             <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
+            <Link href="/cart">
+              <Button>Add to Cart</Button>
+            </Link>
           </Flex>
         </Flex>
       </Box>

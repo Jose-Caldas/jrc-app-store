@@ -1,7 +1,6 @@
 import { Flex, Text, Stack } from "@chakra-ui/layout";
 import { useContext, useEffect } from "react";
 import { CustomerItem } from "../components/CustomerItem";
-import { OrderItem } from "../components/OrderItem";
 import { SideBar } from "../components/SideBar";
 import { AuthContext } from "../context/AuthContext";
 import { api } from "./api";

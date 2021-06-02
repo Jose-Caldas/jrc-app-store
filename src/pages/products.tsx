@@ -4,17 +4,13 @@ import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
-import { ProductProps } from "../components/ProductItem";
+import { setCookie } from "nookies";
 
 type Product = {
   _id: string;
   name: string;
   price: number;
 };
-
-// interface ProductsResult {
-//   products: Array<Product>;
-// }
 
 async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
