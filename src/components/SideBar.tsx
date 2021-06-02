@@ -5,6 +5,7 @@ import {
   FiUsers,
   FiShoppingBag,
   FiShoppingCart,
+  FiSkipBack,
 } from "react-icons/fi";
 import { ActiveLink } from "./ActiveLink";
 
@@ -21,6 +22,12 @@ export function SideBar() {
       fontWeight="600"
       color="#8886A5"
     >
+      <Link href="/">
+        <Flex align="center" mt="20px">
+          <Icon as={FiSkipBack} />
+          <Text ml="8px">Home</Text>
+        </Flex>
+      </Link>
       <Stack spacing="12" alignItems="flex-start" pt="163px">
         <Flex alignItems="center">
           <Link href="/products" display="flex" alignItems="center">

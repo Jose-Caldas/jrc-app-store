@@ -19,9 +19,9 @@ type AuthProviderProps = {
 };
 
 type User = {
-  email: string;
   _id: string;
   name: string;
+  email: string;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -35,7 +35,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       api.get("/user").then((response) => {
-        console.log(response.data);
+        const { name, email } = response.data;
+
+        // console.log(response.data);
       });
     }
   }, []);
@@ -46,8 +48,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
         email,
         password,
       });
+      // console.log(response);
 
-      const { _id, name, token, refreshToken } = response.data;
+      const { _id, name, token } = response.data;
+      // console.log(response.data);
 
       setUser({
         _id,
@@ -55,13 +59,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name,
       });
 
+      api.defaults.headers["Authorization"] = `${token}`;
+
       Router.push("/customers");
 
       setCookie(undefined, "appstore.token", token, {
-        maxAge: 60 * 60 * 24 * 30, //30days
-        path: "/",
-      });
-      setCookie(undefined, "appstore.refreshToken", refreshToken, {
         maxAge: 60 * 60 * 24 * 30, //30days
         path: "/",
       });

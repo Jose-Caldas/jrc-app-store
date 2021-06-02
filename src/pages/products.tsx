@@ -4,23 +4,24 @@ import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
+import { ProductProps } from "../components/ProductItem";
 
 type Product = {
-  _id: string;
   name: string;
-  price: string;
+  price: number;
 };
 
-interface ProductsResult {
-  products: Array<Product>;
-}
+// interface ProductsResult {
+//   products: Array<Product>;
+// }
 
-export async function getProducts(): Promise<Product[]> {
+async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
+  console.log(response.data);
   return response.data;
 }
 
-export default function Products() {
+export default function Products({ product }: ProductProps) {
   const { data, isLoading, isFetching, error } = useQuery(
     "product",
     getProducts,
@@ -55,14 +56,19 @@ export default function Products() {
           </Text>
         ) : (
           <Flex wrap="wrap">
-            {data.map((product) => (
-              <ProductItem
-                key={product._id}
-                name={product.name}
-                price={product.price}
-              />
-            ))}
+            {data.map((product) => {
+              return (
+                <ProductItem
+                  product={{ name: product.name, price: product.price }}
+                />
+              );
+            })}
           </Flex>
+          // <Flex wrap="wrap">
+          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
+          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
+          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
+          // </Flex>
         )}
       </Flex>
     </Flex>

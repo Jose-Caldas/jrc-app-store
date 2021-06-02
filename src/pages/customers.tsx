@@ -1,11 +1,17 @@
 import { Flex, Text, Stack } from "@chakra-ui/layout";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { CustomerItem } from "../components/CustomerItem";
 import { OrderItem } from "../components/OrderItem";
 import { SideBar } from "../components/SideBar";
 import { AuthContext } from "../context/AuthContext";
+import { api } from "./api";
 
 export default function Customers() {
   const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    api.get("/user").then((response) => console.log(response.data));
+  }, []);
 
   return (
     <Flex>
@@ -15,8 +21,8 @@ export default function Customers() {
           Customers
         </Text>
         <Stack spacing="6">
-          <OrderItem name={user?.name} email={user?.email} />
-          <OrderItem name="Julio" email="julio@gmail.com" />
+          <CustomerItem name={user?.name} email={user?.email} />
+          <CustomerItem name={user?.name} email={user?.email} />
         </Stack>
       </Flex>
     </Flex>

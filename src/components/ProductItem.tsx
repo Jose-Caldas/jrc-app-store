@@ -3,12 +3,14 @@ import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
 import { SelectQuanty } from "./SelectQuanty";
 
-interface ProductProps {
-  name: string;
-  price: string;
+export interface ProductProps {
+  product: {
+    name: string;
+    price: number;
+  };
 }
 
-export function ProductItem({ name, price }: ProductProps) {
+export function ProductItem({ product }: ProductProps) {
   return (
     <Flex>
       <Box
@@ -26,7 +28,7 @@ export function ProductItem({ name, price }: ProductProps) {
         <CartLink />
         <Flex flexDirection="column">
           <Text textAlign="center" fontSize="24px" fontWeight="600" mt="36px">
-            {name}
+            {product.name}
           </Text>
           <Text
             textAlign="center"
@@ -35,7 +37,7 @@ export function ProductItem({ name, price }: ProductProps) {
             fontWeight="400"
             fontSize="18px"
           >
-            {price}
+            {product.price}
           </Text>
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">
