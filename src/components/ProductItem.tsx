@@ -4,13 +4,12 @@ import { CartLink } from "./CartLink";
 import { SelectQuanty } from "./SelectQuanty";
 
 export interface ProductProps {
-  product: {
-    name: string;
-    price: number;
-  };
+  _id?: string;
+  name: string;
+  price: number;
 }
 
-export function ProductItem({ product }: ProductProps) {
+export function ProductItem({ name, price, _id }: ProductProps) {
   return (
     <Flex>
       <Box
@@ -28,7 +27,7 @@ export function ProductItem({ product }: ProductProps) {
         <CartLink />
         <Flex flexDirection="column">
           <Text textAlign="center" fontSize="24px" fontWeight="600" mt="36px">
-            {product.name}
+            {name}
           </Text>
           <Text
             textAlign="center"
@@ -37,7 +36,7 @@ export function ProductItem({ product }: ProductProps) {
             fontWeight="400"
             fontSize="18px"
           >
-            {product.price}
+            {price}
           </Text>
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">

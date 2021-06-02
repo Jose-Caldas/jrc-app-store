@@ -7,6 +7,7 @@ import { SideBar } from "../components/SideBar";
 import { ProductProps } from "../components/ProductItem";
 
 type Product = {
+  _id: string;
   name: string;
   price: number;
 };
@@ -17,11 +18,11 @@ type Product = {
 
 async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
-  console.log(response.data);
-  return response.data;
+  // console.log(response.data);
+  return response.data["products"];
 }
 
-export default function Products({ product }: ProductProps) {
+export default function Products() {
   const { data, isLoading, isFetching, error } = useQuery(
     "product",
     getProducts,
@@ -29,6 +30,7 @@ export default function Products({ product }: ProductProps) {
       staleTime: 1000 * 5,
     }
   );
+  // console.log(data);
 
   return (
     <Flex>
@@ -59,15 +61,15 @@ export default function Products({ product }: ProductProps) {
             {data.map((product) => {
               return (
                 <ProductItem
-                  product={{ name: product.name, price: product.price }}
+                  key={product._id}
+                  name={product.name}
+                  price={product.price}
                 />
               );
             })}
           </Flex>
           // <Flex wrap="wrap">
-          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
-          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
-          //   <ProductItem product={{ name: "Shoe", price: 42 }} />
+          //   <ProductItem name="Shoes" price={42} />
           // </Flex>
         )}
       </Flex>
