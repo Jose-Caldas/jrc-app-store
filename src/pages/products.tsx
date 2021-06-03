@@ -6,13 +6,14 @@ import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 import { setCookie } from "nookies";
 
-type Product = {
-  _id: string;
+export type Product = {
+  _id?: string;
   name: string;
   price: number;
+  total?: number;
 };
 
-async function getProducts(): Promise<Product[]> {
+export async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
   // console.log(response.data);
   return response.data["products"];

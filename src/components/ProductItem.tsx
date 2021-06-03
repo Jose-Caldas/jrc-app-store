@@ -4,19 +4,22 @@ import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
 import { SelectQuanty } from "./SelectQuanty";
 
-setCookie(undefined, "cart-product", "cookie-value", {
-  maxAge: 60 * 60 * 24 * 30, //30days
-  path: "/cart",
+import Cart from "../pages/cart";
+import { useState } from "react";
+import Products, { Product } from "../pages/products";
+import { api } from "../pages/api";
+
+export const numberFormat = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
 });
 
-export interface ProductProps {
-  _id?: string;
-  name: string;
-  price: number;
-  total?: number;
-}
+export function ProductItem({ name, price, _id }: Product) {
+  setCookie(undefined, "cart-product", "value", {
+    maxAge: 60 * 60 * 24 * 30, //30days
+    path: "/cart",
+  });
 
-export function ProductItem({ name, price, _id, total }: ProductProps) {
   return (
     <Flex>
       <Box
@@ -43,7 +46,7 @@ export function ProductItem({ name, price, _id, total }: ProductProps) {
             fontWeight="400"
             fontSize="18px"
           >
-            {price}
+            {numberFormat.format(price)}
           </Text>
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">

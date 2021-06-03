@@ -4,28 +4,19 @@ import {
   Box,
   Table,
   Tr,
-  Th,
-  Icon,
   Tbody,
   Td,
   Button,
   Link,
 } from "@chakra-ui/react";
-import { ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "../components/CartLink";
 import { SelectQuanty } from "../components/SelectQuanty";
 import { SideBar } from "../components/SideBar";
+import { Product } from "./products";
 
-interface CartProps {
-  cart_item: string;
-
-  item_price: number;
-  total: number;
-}
-
-export default function Cart({ cart_item, item_price, total }: CartProps) {
+export default function Cart({ name, price }: Product) {
   const { formState } = useForm();
   return (
     <Flex position="relative">
@@ -47,7 +38,7 @@ export default function Cart({ cart_item, item_price, total }: CartProps) {
             <Tbody>
               <Tr width="100%">
                 <Td fontSize="24px" fontWeight="600">
-                  {cart_item}
+                  {name}
                 </Td>
                 <Td textAlign="end">
                   <SelectQuanty color="#F97575" icon={FiMinusCircle} />
@@ -61,7 +52,7 @@ export default function Cart({ cart_item, item_price, total }: CartProps) {
                   color="#8886A5"
                   textAlign="end"
                 >
-                  {item_price}
+                  {price}
                 </Td>
               </Tr>
             </Tbody>
@@ -71,7 +62,7 @@ export default function Cart({ cart_item, item_price, total }: CartProps) {
               Total
             </Text>
             <Text fontSize="24px" fontWeight="600" pb="22px">
-              {total}
+              {}
             </Text>
           </Flex>
         </Box>
