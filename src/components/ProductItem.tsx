@@ -4,21 +4,18 @@ import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
 import { SelectQuanty } from "./SelectQuanty";
 
-import Cart from "../pages/cart";
-import { useState } from "react";
-import Products, { Product } from "../pages/products";
-import { api } from "../pages/api";
-
-export const numberFormat = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+import { useContext } from "react";
+import { Product } from "../pages/products";
+import { CartContext } from "../context/CartContext";
+import { numberFormat } from "../utils/numberFormat";
 
 export function ProductItem({ name, price, _id }: Product) {
   setCookie(undefined, "cart-product", "value", {
     maxAge: 60 * 60 * 24 * 30, //30days
     path: "/cart",
   });
+
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
     <Flex>

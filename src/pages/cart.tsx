@@ -9,15 +9,20 @@ import {
   Button,
   Link,
 } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "../components/CartLink";
 import { SelectQuanty } from "../components/SelectQuanty";
 import { SideBar } from "../components/SideBar";
+import { CartContext } from "../context/CartContext";
 import { Product } from "./products";
 
 export default function Cart({ name, price }: Product) {
   const { formState } = useForm();
+
+  const { cartItems } = useContext(CartContext);
+
   return (
     <Flex position="relative">
       <SideBar />
@@ -39,6 +44,7 @@ export default function Cart({ name, price }: Product) {
               <Tr width="100%">
                 <Td fontSize="24px" fontWeight="600">
                   {name}
+                  {cartItems.length === 0 && <div>Empty Cart</div>}
                 </Td>
                 <Td textAlign="end">
                   <SelectQuanty color="#F97575" icon={FiMinusCircle} />

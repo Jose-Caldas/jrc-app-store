@@ -1,5 +1,5 @@
 import { Flex, Text, Box } from "@chakra-ui/react";
-import { numberFormat } from "../components/ProductItem";
+import { numberFormat } from "../utils/numberFormat";
 
 interface BoxOrderProps {
   value: number;
@@ -14,7 +14,7 @@ export function OrderItem({ value, date }: BoxOrderProps) {
           {numberFormat.format(value)}
         </Text>
         <Text color="#8886A5" fontSize="12px">
-          {date}
+          {new Intl.DateTimeFormat("pt-BR").format(new Date())}
         </Text>
       </Flex>
     </Box>
