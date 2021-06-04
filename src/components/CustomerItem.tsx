@@ -3,9 +3,10 @@ import { Flex, Text, Box } from "@chakra-ui/layout";
 interface BoxOrderProps {
   name: string;
   email: string;
+  wasVerified?: boolean;
 }
 
-export function CustomerItem({ name, email }: BoxOrderProps) {
+export function CustomerItem({ name, email, wasVerified }: BoxOrderProps) {
   return (
     <Box width="740px" height="112px" bg="#FFFFFF" pt="27px" pl="22px">
       <Text fontWeight="600" fontSize="18px" mb="10px">

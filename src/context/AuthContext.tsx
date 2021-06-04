@@ -11,7 +11,7 @@ type SignInCredentials = {
 type AuthContextData = {
   SignIn(credentials: SignInCredentials): Promise<void>;
   user: User;
-  isAuthenticated: boolean;
+  wasVerified: boolean;
 };
 
 type AuthProviderProps = {
@@ -28,16 +28,17 @@ export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
-  const isAuthenticated = !!user;
+  const wasVerified = !!user;
 
   useEffect(() => {
     const { "appstore.token": token } = parseCookies();
+    const { "appstore.verificationCode": verificationCode } = parseCookies();
 
-    if (token) {
+    if (token && verificationCode) {
       api.get("/user").then((response) => {
-        const { name, email } = response.data;
-
+        // const { name, email, token, wasVerified } = response.data;
         // console.log(response.data);
+        return response.data["users"];
       });
     }
   }, []);
@@ -50,7 +51,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       });
       // console.log(response);
 
-      const { _id, name, token } = response.data;
+      const { _id, name, token, verificationCode } = response.data;
       // console.log(response.data);
 
       setUser({
@@ -59,9 +60,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
         name,
       });
 
-      api.defaults.headers["Authorization"] = `${token}`;
+      api.defaults.headers["Authorization"] = `${token} ${verificationCode}`;
 
       Router.push("/customers");
+
+      setCookie(undefined, "appstore.verificationCode", verificationCode, {
+        maxAge: 60 * 60 * 24 * 30, //30days
+        path: "/",
+      });
 
       setCookie(undefined, "appstore.token", token, {
         maxAge: 60 * 60 * 24 * 30, //30days
@@ -73,7 +79,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ SignIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ SignIn, wasVerified, user }}>
       {children}
     </AuthContext.Provider>
   );

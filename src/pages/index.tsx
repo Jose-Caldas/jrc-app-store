@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 type SignInFormData = {
@@ -31,9 +31,6 @@ export default function SignIn() {
   };
 
   const { errors } = formState;
-
-  // useEffect(() => {}, []);
-  // console.log(errors);
 
   return (
     <Flex

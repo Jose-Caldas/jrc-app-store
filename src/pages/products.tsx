@@ -15,7 +15,6 @@ export type Product = {
 
 export async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
-  // console.log(response.data);
   return response.data["products"];
 }
 
@@ -27,7 +26,6 @@ export default function Products() {
       staleTime: 1000 * 5,
     }
   );
-  // console.log(data);
 
   return (
     <Flex>
@@ -65,9 +63,6 @@ export default function Products() {
               );
             })}
           </Flex>
-          // <Flex wrap="wrap">
-          //   <ProductItem name="Shoes" price={42} />
-          // </Flex>
         )}
       </Flex>
     </Flex>

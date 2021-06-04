@@ -103,7 +103,13 @@ export default function Registration() {
         </VStack>
 
         <Flex align="center" justify="center">
-          <Button title="Submit" isLoading={formState.isSubmitting} />
+          <Link href="/customers" _hover={{ border: "none" }}>
+            <Button
+              type="submit"
+              title="Submit"
+              isLoading={formState.isSubmitting}
+            />
+          </Link>
         </Flex>
         <Flex>
           <Link

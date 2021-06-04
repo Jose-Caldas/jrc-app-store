@@ -44,7 +44,11 @@ export default function Cart({ name, price }: Product) {
               <Tr width="100%">
                 <Td fontSize="24px" fontWeight="600">
                   {name}
-                  {cartItems.length === 0 && <div>Empty Cart</div>}
+                  {cartItems.length === 0 ? (
+                    <div>Empty Cart</div>
+                  ) : (
+                    <div>Add to cart</div>
+                  )}
                 </Td>
                 <Td textAlign="end">
                   <SelectQuanty color="#F97575" icon={FiMinusCircle} />
@@ -73,7 +77,7 @@ export default function Cart({ name, price }: Product) {
           </Flex>
         </Box>
         <Flex justify="flex-end" mt="46px">
-          <Link href="/orders">
+          <Link href="/orders" _hover={{ border: "none" }}>
             <Button
               type="submit"
               colorScheme="blue"

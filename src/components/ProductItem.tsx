@@ -14,7 +14,6 @@ export function ProductItem({ name, price, _id }: Product) {
     maxAge: 60 * 60 * 24 * 30, //30days
     path: "/cart",
   });
-
   const { cartItems, setCartItems } = useContext(CartContext);
 
   return (
