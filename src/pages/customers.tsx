@@ -7,17 +7,27 @@ import { api } from "./api";
 import { useQuery } from "react-query";
 import { Spinner } from "@chakra-ui/spinner";
 
-export type Users = {
-  _id?: string;
+export interface User {
+  isVisible: boolean;
+  isActive: boolean;
+  _id: string;
+  email: Email;
   name: string;
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+}
+
+export interface Email {
   email: string;
   wasVerified: boolean;
-};
+  verificationCode: string;
+}
 
-export async function getCustomers(): Promise<Users[]> {
+export async function getCustomers(): Promise<User[]> {
   const response = await api.get("/user");
-  console.log(response.data["users"]);
-  return response.data["users"];
+
+  return response.data.users;
 }
 
 export default function Customers() {
@@ -29,13 +39,16 @@ export default function Customers() {
     }
   );
 
-  const { user } = useContext(AuthContext);
+  if (!data?.length) {
+    return <p>Loading</p>;
+  }
+
   return (
     <Flex>
       <SideBar />
       <Flex flexDirection="column" mt="131px">
         <Text fontSize="30px" fontWeight="600" mb="">
-          Customers
+          <Text> Customers</Text>
           {!isLoading && isFetching && (
             <Spinner color="#8886A5" size="sm" ml="4" />
           )}
@@ -56,13 +69,12 @@ export default function Customers() {
           </Text>
         ) : (
           <Flex wrap="wrap">
-            {data.map((user) => {
+            {data?.map((user) => {
               return (
                 <CustomerItem
                   key={user._id}
                   name={user.name}
-                  email={user.email}
-                  wasVerified={true}
+                  email={user.email.email}
                 />
               );
             })}
@@ -72,3 +84,8 @@ export default function Customers() {
     </Flex>
   );
 }
+
+// Como objetos funcionam
+// Ler a documentação da API, quais parametros sao necessarios, e o que e retornado da requisição
+// caso a API nao prover os types, entrar no transform.tools e gerar de acordo com o payload
+// isso vai ajudar a acessar as propriedades do objeto

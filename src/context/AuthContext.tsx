@@ -18,11 +18,16 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-type User = {
+export interface Customer {
+  user: User;
+  token: string;
+}
+
+export interface User {
+  email: string;
   _id: string;
   name: string;
-  email: string;
-};
+}
 
 export const AuthContext = createContext({} as AuthContextData);
 
@@ -30,44 +35,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
   const wasVerified = !!user;
 
-  useEffect(() => {
-    const { "appstore.token": token } = parseCookies();
-    const { "appstore.verificationCode": verificationCode } = parseCookies();
-
-    if (token && verificationCode) {
-      api.get("/user").then((response) => {
-        // const { name, email, token, wasVerified } = response.data;
-        // console.log(response.data);
-        return response.data["users"];
-      });
-    }
-  }, []);
-
   async function SignIn({ email, password }: SignInCredentials) {
     try {
-      const response = await api.post("/login", {
+      const response = await api.post<Customer>("/login", {
         email,
         password,
       });
-      // console.log(response);
 
-      const { _id, name, token, verificationCode } = response.data;
-      // console.log(response.data);
+      const { user, token } = response.data;
 
       setUser({
-        _id,
-        email,
-        name,
+        _id: user._id,
+        email: user.email,
+        name: user.name,
       });
 
-      api.defaults.headers["Authorization"] = `${token} ${verificationCode}`;
+      api.defaults.headers["Authorization"] = `${token}`;
 
       Router.push("/customers");
-
-      setCookie(undefined, "appstore.verificationCode", verificationCode, {
-        maxAge: 60 * 60 * 24 * 30, //30days
-        path: "/",
-      });
 
       setCookie(undefined, "appstore.token", token, {
         maxAge: 60 * 60 * 24 * 30, //30days
@@ -84,3 +69,39 @@ export function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
+
+// const fn = (chave) => {
+//   const obj = {
+//     name: "Julio",
+//     0: () => {},
+//     ["authorization-header"]: false,
+//   };
+// };
+
+// fn(0);
+
+// const response = {
+//   name: "GitHub",
+//   short_name: "GitHub",
+//   icons: [
+//     {
+//       sizes: "114x114",
+//       src:
+
+//     },
+//     {
+//       sizes: "120x120",
+//       src: "https://github.githubassets.com/apple-touch-icon-120x120.png",
+//     },
+//   ],
+//   prefer_related_applications: true,
+//   related_applications: [
+//     {
+//       platform: "play",
+//       url: "https://play.google.com/store/apps/details?id=com.github.android",
+//       id: "com.github.android",
+//     },
+//   ],
+// };
+
+// response.icons.find((el) => !el.src );

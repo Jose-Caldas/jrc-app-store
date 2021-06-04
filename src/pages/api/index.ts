@@ -6,8 +6,6 @@ const cookies = parseCookies();
 export const api = axios.create({
   baseURL: "https://e-commerce-b4.herokuapp.com",
   headers: {
-    Authorization: `${
-      (cookies["appstore.token"], ["appstore.verificationCode"])
-    }`,
+    Authorization: cookies["appstore.token"],
   },
 });
