@@ -18,7 +18,7 @@ import { SideBar } from "../components/SideBar";
 import { CartContext } from "../context/CartContext";
 import { Product } from "./products";
 
-export default function Cart({ name, price }: Product) {
+export default function Cart({ name, price, total }: Product) {
   const { formState } = useForm();
 
   const { cartItems } = useContext(CartContext);
@@ -44,11 +44,6 @@ export default function Cart({ name, price }: Product) {
               <Tr width="100%">
                 <Td fontSize="24px" fontWeight="600">
                   {name}
-                  {cartItems.length === 0 ? (
-                    <div>Empty Cart</div>
-                  ) : (
-                    <div>Add to cart</div>
-                  )}
                 </Td>
                 <Td textAlign="end">
                   <SelectQuanty color="#F97575" icon={FiMinusCircle} />
@@ -62,7 +57,7 @@ export default function Cart({ name, price }: Product) {
                   color="#8886A5"
                   textAlign="end"
                 >
-                  {price}
+                  {42}
                 </Td>
               </Tr>
             </Tbody>
@@ -72,7 +67,7 @@ export default function Cart({ name, price }: Product) {
               Total
             </Text>
             <Text fontSize="24px" fontWeight="600" pb="22px">
-              {}
+              {total}
             </Text>
           </Flex>
         </Box>

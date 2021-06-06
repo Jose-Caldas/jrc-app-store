@@ -39,20 +39,20 @@ export default function Customers() {
     }
   );
 
-  if (!data?.length) {
-    return <p>Loading</p>;
-  }
+  // if (!data?.length) {
+  //   return <p>Loading</p>;
+  // }
 
   return (
     <Flex>
       <SideBar />
       <Flex flexDirection="column" mt="131px">
-        <Text fontSize="30px" fontWeight="600" mb="">
-          <Text> Customers</Text>
-          {!isLoading && isFetching && (
-            <Spinner color="#8886A5" size="sm" ml="4" />
-          )}
+        <Text fontSize="30px" fontWeight="600" mb="30px">
+          Customers
         </Text>
+        {!isLoading && isFetching && (
+          <Spinner color="#8886A5" size="sm" ml="4" />
+        )}
         {isLoading ? (
           <Flex
             color="#8886A5"
@@ -68,7 +68,7 @@ export default function Customers() {
             Falha ao obter os dados
           </Text>
         ) : (
-          <Flex wrap="wrap">
+          <Stack spacing="6">
             {data?.map((user) => {
               return (
                 <CustomerItem
@@ -78,7 +78,7 @@ export default function Customers() {
                 />
               );
             })}
-          </Flex>
+          </Stack>
         )}
       </Flex>
     </Flex>

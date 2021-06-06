@@ -59,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         path: "/",
       });
     } catch (error) {
-      console.log(error);
+      Router.push("/login_error");
     }
   }
 
@@ -69,39 +69,3 @@ export function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
-
-// const fn = (chave) => {
-//   const obj = {
-//     name: "Julio",
-//     0: () => {},
-//     ["authorization-header"]: false,
-//   };
-// };
-
-// fn(0);
-
-// const response = {
-//   name: "GitHub",
-//   short_name: "GitHub",
-//   icons: [
-//     {
-//       sizes: "114x114",
-//       src:
-
-//     },
-//     {
-//       sizes: "120x120",
-//       src: "https://github.githubassets.com/apple-touch-icon-120x120.png",
-//     },
-//   ],
-//   prefer_related_applications: true,
-//   related_applications: [
-//     {
-//       platform: "play",
-//       url: "https://play.google.com/store/apps/details?id=com.github.android",
-//       id: "com.github.android",
-//     },
-//   ],
-// };
-
-// response.icons.find((el) => !el.src );

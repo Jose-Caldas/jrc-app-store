@@ -32,6 +32,15 @@ export default function SignIn() {
 
   const { errors } = formState;
 
+  // if (errors) {
+  //   return (
+  //     <Flex>
+  //       <Text>Email ou senha incorreta</Text>
+  //       <Link href="/">Tentar Novamente</Link>
+  //     </Flex>
+  //   );
+  // }
+
   return (
     <Flex
       align="center"
@@ -52,6 +61,7 @@ export default function SignIn() {
         <Text mb="70px" textAlign="center" fontSize="30px">
           Login
         </Text>
+
         <Stack spacing="4">
           <Input
             name="email"

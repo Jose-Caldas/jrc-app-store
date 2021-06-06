@@ -15,7 +15,8 @@ export type Product = {
 
 export async function getProducts(): Promise<Product[]> {
   const response = await api.get("/product");
-  return response.data["products"];
+
+  return response.data.products;
 }
 
 export default function Products() {
@@ -33,10 +34,10 @@ export default function Products() {
       <Flex flexDirection="column" mt="131px">
         <Text fontSize="30px" fontWeight="600" mb="">
           Products
-          {!isLoading && isFetching && (
-            <Spinner color="#8886A5" size="sm" ml="4" />
-          )}
         </Text>
+        {!isLoading && isFetching && (
+          <Spinner color="#8886A5" size="sm" ml="4" />
+        )}
         {isLoading ? (
           <Flex
             color="#8886A5"
