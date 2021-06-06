@@ -45,7 +45,7 @@ export default function Customers() {
   return (
     <Flex flex="1" w="100vw">
       <SideBar />
-      <Flex flexDirection="column" mt="131px" w="100%" p="30">
+      <Flex flexDirection="column" mt="50px" w="100%" p="30">
         <Text fontSize="30px" fontWeight="600" mb="30px">
           Customers
         </Text>

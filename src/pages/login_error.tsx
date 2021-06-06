@@ -3,7 +3,7 @@ import { IoWarningOutline } from "react-icons/io5";
 
 export default function LoginError() {
   return (
-    <Flex align="center" justify="center" h="50vh">
+    <Flex align="center" justify="center" h="70vh">
       <Flex
         bg="white"
         flexDirection="column"
@@ -19,17 +19,20 @@ export default function LoginError() {
         <Text fontSize="30px" mb="10px">
           Email ou senha incorretos
         </Text>
-        <Link href="/" color="#577BF9" fontSize="20px" fontWeight="bold">
-          Voltar e tentar novamente
-        </Link>
-        <Link
-          href="/registration"
-          color="#577BF9"
-          fontSize="20px"
-          fontWeight="bold"
-        >
-          Criar nova conta
-        </Link>
+        <Flex flexDirection="column" align="center">
+          <Link href="/" color="#577BF9" fontSize="20px" fontWeight="bold">
+            Voltar e tentar novamente
+          </Link>
+          <Text>Ou</Text>
+          <Link
+            href="/registration"
+            color="#577BF9"
+            fontSize="20px"
+            fontWeight="bold"
+          >
+            Criar nova conta
+          </Link>
+        </Flex>
       </Flex>
     </Flex>
   );

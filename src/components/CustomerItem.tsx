@@ -7,7 +7,7 @@ interface BoxOrderProps {
 
 export function CustomerItem({ name, email }: BoxOrderProps) {
   return (
-    <Box width="740px" height="80px" bg="#FFFFFF" pt="10px" pl="22px">
+    <Box width="740px" height="112px" bg="#FFFFFF" pt="10px" pl="22px">
       <Text fontWeight="600" fontSize="18px" mb="10px">
         {name}
       </Text>
