@@ -32,15 +32,6 @@ export default function SignIn() {
 
   const { errors } = formState;
 
-  // if (errors) {
-  //   return (
-  //     <Flex>
-  //       <Text>Email ou senha incorreta</Text>
-  //       <Link href="/">Tentar Novamente</Link>
-  //     </Flex>
-  //   );
-  // }
-
   return (
     <Flex
       align="center"

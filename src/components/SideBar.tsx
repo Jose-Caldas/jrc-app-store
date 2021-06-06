@@ -7,6 +7,8 @@ import {
   FiShoppingCart,
   FiSkipBack,
 } from "react-icons/fi";
+
+import { BiLogOut } from "react-icons/bi";
 import { ActiveLink } from "./ActiveLink";
 
 export function SideBar() {
@@ -22,7 +24,7 @@ export function SideBar() {
       fontWeight="600"
       color="#8886A5"
     >
-      <Link href="/">
+      <Link href="/dashboard">
         <Flex align="center" mt="20px">
           <Icon as={FiSkipBack} />
           <Text ml="8px">Home</Text>
@@ -51,6 +53,12 @@ export function SideBar() {
           <Link href="/cart" display="flex" alignItems="center">
             <Icon as={FiShoppingCart} />
             <Text ml="16px">Cart</Text>
+          </Link>
+        </Flex>
+        <Flex alignItems="center">
+          <Link href="/" display="flex" alignItems="center">
+            <Icon as={BiLogOut} />
+            <Text ml="16px">SignOut</Text>
           </Link>
         </Flex>
       </Stack>

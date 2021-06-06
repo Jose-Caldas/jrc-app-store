@@ -20,8 +20,7 @@ export interface User {
 
 export interface Email {
   email: string;
-  wasVerified: boolean;
-  verificationCode: string;
+  name: string;
 }
 
 export async function getCustomers(): Promise<User[]> {
@@ -44,9 +43,9 @@ export default function Customers() {
   // }
 
   return (
-    <Flex>
+    <Flex flex="1" w="100vw">
       <SideBar />
-      <Flex flexDirection="column" mt="131px">
+      <Flex flexDirection="column" mt="131px" w="100%" p="30">
         <Text fontSize="30px" fontWeight="600" mb="30px">
           Customers
         </Text>
@@ -68,7 +67,7 @@ export default function Customers() {
             Falha ao obter os dados
           </Text>
         ) : (
-          <Stack spacing="6">
+          <Stack spacing="4">
             {data?.map((user) => {
               return (
                 <CustomerItem

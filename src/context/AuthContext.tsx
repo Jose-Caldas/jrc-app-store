@@ -52,7 +52,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       api.defaults.headers["Authorization"] = `${token}`;
 
-      Router.push("/customers");
+      Router.push("/dashboard");
 
       setCookie(undefined, "appstore.token", token, {
         maxAge: 60 * 60 * 24 * 30, //30days
