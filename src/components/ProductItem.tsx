@@ -1,15 +1,14 @@
-import { Box, Text, Flex, Button, Link } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, Link, Icon } from "@chakra-ui/react";
 import { setCookie } from "nookies";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
-import { SelectQuanty } from "./SelectQuanty";
 
 import { useContext } from "react";
 import { Product } from "../pages/products";
 import { CartContext } from "../context/CartContext";
 import { numberFormat } from "../utils/numberFormat";
 
-export function ProductItem({ name, price, _id }: Product) {
+export function ProductItem({ name, price }: Product) {
   setCookie(undefined, "cart-product", "value", {
     maxAge: 60 * 60 * 24 * 30, //30days
     path: "/cart",
@@ -47,10 +46,14 @@ export function ProductItem({ name, price, _id }: Product) {
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">
           <Flex justify="space-evenly" width="100%" align="center">
-            <SelectQuanty color="#F97575" icon={FiMinusCircle} />
-            <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
+            <Button bg="transparent">
+              <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
+            </Button>
+            <Button bg="transparent">
+              <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+            </Button>
             <Link href="/cart">
-              <Button>Add to Cart</Button>
+              <Button>add to cart</Button>
             </Link>
           </Flex>
         </Flex>

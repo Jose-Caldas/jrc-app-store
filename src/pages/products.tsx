@@ -1,10 +1,11 @@
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 import { setCookie } from "nookies";
+import { ReactElement } from "react";
 
 export type Product = {
   _id?: string;

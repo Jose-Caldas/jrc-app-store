@@ -13,15 +13,16 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "../components/CartLink";
-import { SelectQuanty } from "../components/SelectQuanty";
 import { SideBar } from "../components/SideBar";
 import { CartContext } from "../context/CartContext";
 import { Product } from "./products";
 
-export default function Cart({ name, price, total }: Product) {
-  const { formState } = useForm();
+function productOnCart() {
+  let containerProdutos = document.getElementById("Product-list");
+}
 
-  const { cartItems } = useContext(CartContext);
+export default function Cart() {
+  const { formState } = useForm();
 
   return (
     <Flex position="relative">
@@ -32,44 +33,20 @@ export default function Cart({ name, price, total }: Product) {
         </Text>
         <Box
           width="800px"
-          h="430px"
           display="flex"
           flexDirection="column"
           bg="#FFFFFF"
           justifyContent="space-between"
-          p="10px"
+          p="20px"
         >
-          <Table colorScheme="purple" bg="#FFFFFF" borderColor="#8886A5">
-            <Tbody>
-              <Tr width="100%">
-                <Td fontSize="24px" fontWeight="600">
-                  {name}
-                </Td>
-                <Td textAlign="end">
-                  <SelectQuanty color="#F97575" icon={FiMinusCircle} />
-                </Td>
-                <Td textAlign="center">
-                  <SelectQuanty color="#577BF9" icon={FiPlusCircle} />
-                </Td>
-                <Td
-                  fontSize="18px"
-                  fontWeight="400"
-                  color="#8886A5"
-                  textAlign="end"
-                >
-                  {42}
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-          <Flex justify="space-between" px="24px">
-            <Text fontSize="24px" fontWeight="600">
-              Total
-            </Text>
-            <Text fontSize="24px" fontWeight="600" pb="22px">
-              {total}
-            </Text>
-          </Flex>
+          <Text
+            id="Product-list"
+            p="10px"
+            borderBottom="1px"
+            borderColor="gray.200"
+          >
+            Lista de produtos vazia
+          </Text>
         </Box>
         <Flex justify="flex-end" mt="46px">
           <Link href="/orders" _hover={{ border: "none" }}>
