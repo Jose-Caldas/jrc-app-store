@@ -1,20 +1,16 @@
 import { Box, Text, Flex, Button, Link, Icon } from "@chakra-ui/react";
-import { setCookie } from "nookies";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
 
-import { useContext } from "react";
-import { Product } from "../pages/products";
-import { CartContext } from "../context/CartContext";
 import { numberFormat } from "../utils/numberFormat";
+import { useState } from "react";
 
-export function ProductItem({ name, price }: Product) {
-  setCookie(undefined, "cart-product", "value", {
-    maxAge: 60 * 60 * 24 * 30, //30days
-    path: "/cart",
-  });
-  const { cartItems, setCartItems } = useContext(CartContext);
-
+export function ProductItem({ name, price }) {
+  const [amountItems, setAmountItems] = useState(price);
+  if (amountItems === 0) {
+    setAmountItems(price);
+  }
+  console.log(amountItems);
   return (
     <Flex>
       <Box
@@ -41,15 +37,21 @@ export function ProductItem({ name, price }: Product) {
             fontWeight="400"
             fontSize="18px"
           >
-            {numberFormat.format(price)}
+            {numberFormat.format(amountItems)}
           </Text>
         </Flex>
         <Flex bg="gray.300" height="57px" borderBottomRadius="9px">
           <Flex justify="space-evenly" width="100%" align="center">
-            <Button bg="transparent">
+            <Button
+              onClick={() => setAmountItems(amountItems - price)}
+              bg="transparent"
+            >
               <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
             </Button>
-            <Button bg="transparent">
+            <Button
+              onClick={() => setAmountItems(amountItems + price)}
+              bg="transparent"
+            >
               <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
             </Button>
             <Link href="/cart">

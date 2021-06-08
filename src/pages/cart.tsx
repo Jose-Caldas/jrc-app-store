@@ -17,10 +17,6 @@ import { SideBar } from "../components/SideBar";
 import { CartContext } from "../context/CartContext";
 import { Product } from "./products";
 
-function productOnCart() {
-  let containerProdutos = document.getElementById("Product-list");
-}
-
 export default function Cart() {
   const { formState } = useForm();
 
