@@ -1,21 +1,7 @@
-import {
-  Flex,
-  Text,
-  Box,
-  Table,
-  Tr,
-  Tbody,
-  Td,
-  Button,
-  Link,
-} from "@chakra-ui/react";
-import { useContext } from "react";
+import { Flex, Text, Box, Button, Link } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "../components/CartLink";
 import { SideBar } from "../components/SideBar";
-import { CartContext } from "../context/CartContext";
-import { Product } from "./products";
 
 export default function Cart() {
   const { formState } = useForm();

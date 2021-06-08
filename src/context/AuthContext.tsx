@@ -11,6 +11,7 @@ type SignInCredentials = {
 type AuthContextData = {
   SignIn(credentials: SignInCredentials): Promise<void>;
   user: User;
+  getProducts: () => void;
 };
 
 type AuthProviderProps = {
@@ -28,7 +29,20 @@ export interface User {
   name: string;
 }
 
+export type ProductProps = {
+  _id?: string;
+  name: string;
+  price: number;
+  total?: number;
+};
+
 export const AuthContext = createContext({} as AuthContextData);
+
+export async function getProducts(): Promise<ProductProps[]> {
+  const response = await api.get("/product");
+
+  return response.data.products;
+}
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
@@ -63,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ SignIn, user }}>
+    <AuthContext.Provider value={{ SignIn, user, getProducts }}>
       {children}
     </AuthContext.Provider>
   );

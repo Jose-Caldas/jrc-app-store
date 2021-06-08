@@ -13,8 +13,14 @@ export default function Orders() {
           Orders
         </Text>
         <Stack spacing="6">
-          <OrderItem value={300} date="19/05/2021" />
-          <OrderItem value={300} date="19/05/2021" />
+          <OrderItem
+            value={300}
+            date={new Intl.DateTimeFormat("pt-BR").format(new Date())}
+          />
+          <OrderItem
+            value={300}
+            date={new Intl.DateTimeFormat("pt-BR").format(new Date())}
+          />
         </Stack>
       </Flex>
     </Flex>

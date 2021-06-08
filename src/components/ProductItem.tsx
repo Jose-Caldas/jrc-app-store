@@ -10,7 +10,7 @@ export function ProductItem({ name, price }) {
   if (amountItems === 0) {
     setAmountItems(price);
   }
-  console.log(amountItems);
+
   return (
     <Flex>
       <Box
@@ -19,7 +19,7 @@ export function ProductItem({ name, price }) {
         justifyContent="space-between"
         w="100%"
         width="267px"
-        height="245px"
+        height="200px"
         bg="#FFFFFF"
         borderRadius="9px"
         mr="8"
@@ -27,7 +27,7 @@ export function ProductItem({ name, price }) {
       >
         <CartLink />
         <Flex flexDirection="column">
-          <Text textAlign="center" fontSize="24px" fontWeight="600" mt="36px">
+          <Text textAlign="center" fontSize="24px" fontWeight="600" mt="20px">
             {name}
           </Text>
           <Text
@@ -40,7 +40,7 @@ export function ProductItem({ name, price }) {
             {numberFormat.format(amountItems)}
           </Text>
         </Flex>
-        <Flex bg="gray.300" height="57px" borderBottomRadius="9px">
+        <Flex bg="gray.300" height="50px">
           <Flex justify="space-evenly" width="100%" align="center">
             <Button
               onClick={() => setAmountItems(amountItems - price)}
@@ -54,9 +54,6 @@ export function ProductItem({ name, price }) {
             >
               <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
             </Button>
-            <Link href="/cart">
-              <Button>add to cart</Button>
-            </Link>
           </Flex>
         </Flex>
       </Box>

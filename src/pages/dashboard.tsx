@@ -11,7 +11,6 @@ export default function Dashboard() {
       <Flex flex="1" flexDirection="column" mt="131px" p="30px">
         <Text fontSize="40px" fontWeight="600" mb="22px">
           Welcome customer!!
-          {name}
         </Text>
         <Stack spacing="6">
           <Flex align="center" color="#8886A5" bg="#FFFFFF" p="10px">

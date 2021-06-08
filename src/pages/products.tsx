@@ -1,24 +1,27 @@
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text, Button, Link } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-export type Product = {
-  _id?: string;
-  name: string;
-  price: number;
-  total?: number;
-};
+// export type Product = {
+//   _id?: string;
+//   name: string;
+//   price: number;
+//   total?: number;
+// };
 
-export async function getProducts(): Promise<Product[]> {
-  const response = await api.get("/product");
+// export async function getProducts(): Promise<Product[]> {
+//   const response = await api.get("/product");
 
-  return response.data.products;
-}
+//   return response.data.products;
+// }
 
 export default function Products() {
+  const { getProducts } = useContext(AuthContext);
   const { data, isLoading, isFetching, error } = useQuery(
     "product",
     getProducts,
@@ -55,11 +58,25 @@ export default function Products() {
           <Flex wrap="wrap">
             {data.map((product) => {
               return (
-                <ProductItem
-                  key={product._id}
-                  name={product.name}
-                  price={product.price}
-                />
+                <Flex flexDirection="column" justify="center" m="0 auto">
+                  <ProductItem
+                    key={product._id}
+                    name={product.name}
+                    price={product.price}
+                  />
+                  <Link href="/cart" _hover={{ border: "none" }}>
+                    <Button
+                      type="submit"
+                      colorScheme="blue"
+                      width="267px"
+                      isLoading={isLoading}
+                      borderTopRightRadius="none"
+                      borderTopLeftRadius="none"
+                    >
+                      Add to cart
+                    </Button>
+                  </Link>
+                </Flex>
               );
             })}
           </Flex>
