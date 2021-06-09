@@ -1,15 +1,13 @@
 import { Box, Text, Flex, Button, Link, Icon } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
+import { useStore } from "../pages/productsList";
 
 import { numberFormat } from "../utils/numberFormat";
 import { useState } from "react";
 
 export function ProductItem({ name, price }) {
-  const [amountItems, setAmountItems] = useState(price);
-  if (amountItems === 0) {
-    setAmountItems(price);
-  }
+  const increasePopulation = useStore((state) => state.increasePopulation);
 
   return (
     <Flex>
@@ -37,21 +35,15 @@ export function ProductItem({ name, price }) {
             fontWeight="400"
             fontSize="18px"
           >
-            {numberFormat.format(amountItems)}
+            {numberFormat.format(price)}
           </Text>
         </Flex>
         <Flex bg="gray.300" height="50px">
           <Flex justify="space-evenly" width="100%" align="center">
-            <Button
-              onClick={() => setAmountItems(amountItems - price)}
-              bg="transparent"
-            >
+            <Button bg="transparent">
               <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
             </Button>
-            <Button
-              onClick={() => setAmountItems(amountItems + price)}
-              bg="transparent"
-            >
+            <Button onClick={() => increasePopulation()} bg="transparent">
               <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
             </Button>
           </Flex>

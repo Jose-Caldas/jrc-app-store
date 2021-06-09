@@ -1,7 +1,9 @@
 import { Flex, Text, Box, Button, Link } from "@chakra-ui/react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { CartLink } from "../components/CartLink";
 import { SideBar } from "../components/SideBar";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Cart() {
   const { formState } = useForm();
@@ -27,7 +29,7 @@ export default function Cart() {
             borderBottom="1px"
             borderColor="gray.200"
           >
-            Lista de produtos vazia
+            Lista Vazia
           </Text>
         </Box>
         <Flex justify="flex-end" mt="46px">

@@ -7,6 +7,14 @@ import { SideBar } from "../components/SideBar";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
+import create from "zustand";
+
+export const useStore = create((set) => ({
+  bears: 0,
+  increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  removeAllBears: () => set({ bears: 0 }),
+}));
+
 // export type Product = {
 //   _id?: string;
 //   name: string;
@@ -20,15 +28,17 @@ import { AuthContext } from "../context/AuthContext";
 //   return response.data.products;
 // }
 
-export default function Products() {
+export default function ProductsList() {
+  const bears = useStore((state) => state.bears);
+  console.log(bears);
+
   const { getProducts } = useContext(AuthContext);
-  const { data, isLoading, isFetching, error } = useQuery(
+
+  const { isLoading, error, data, isFetching } = useQuery(
     "product",
-    getProducts,
-    {
-      staleTime: 1000 * 5,
-    }
+    getProducts
   );
+  console.log(data);
 
   return (
     <Flex>
@@ -58,20 +68,21 @@ export default function Products() {
           <Flex wrap="wrap">
             {data.map((product) => {
               return (
-                <Flex flexDirection="column" justify="center" m="0 auto">
-                  <ProductItem
-                    key={product._id}
-                    name={product.name}
-                    price={product.price}
-                  />
+                <Flex
+                  key={product._id}
+                  flexDirection="column"
+                  justify="center"
+                  m="0 auto"
+                >
+                  <ProductItem name={product.name} price={product.price} />
+
                   <Link href="/cart" _hover={{ border: "none" }}>
                     <Button
                       type="submit"
                       colorScheme="blue"
                       width="267px"
                       isLoading={isLoading}
-                      borderTopRightRadius="none"
-                      borderTopLeftRadius="none"
+                      borderTopRadius="none"
                     >
                       Add to cart
                     </Button>
