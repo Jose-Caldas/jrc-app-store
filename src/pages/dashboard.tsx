@@ -1,5 +1,6 @@
 import { Flex, Text, Stack } from "@chakra-ui/react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import SignIn from ".";
 import { CartLink } from "../components/CartLink";
 import { SideBar } from "../components/SideBar";
 import { AuthContext } from "../context/AuthContext";
