@@ -3,12 +3,11 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useEffect,
   useState,
 } from "react";
 import { api } from "../pages/api";
 import Router from "next/router";
-import { setCookie, parseCookies } from "nookies";
+import { setCookie } from "nookies";
 
 type SignInCredentials = {
   email: string;
@@ -62,7 +61,7 @@ export async function getProducts(): Promise<Product[]> {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
-  const wasVerified = !!user;
+  // const wasVerified = !!user;
 
   async function SignIn({ email, password }: SignInCredentials) {
     try {

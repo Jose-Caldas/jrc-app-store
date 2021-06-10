@@ -1,5 +1,6 @@
-import { Box, Icon, Stack, Text, Flex, Link } from "@chakra-ui/react";
+import { Box, Icon, Stack, Text, Flex } from "@chakra-ui/react";
 import React from "react";
+import Link from "next/link";
 import {
   FiPackage,
   FiUsers,
@@ -14,7 +15,7 @@ import { ActiveLink } from "./ActiveLink";
 export function SideBar() {
   return (
     <Box
-      as="aside"
+      as="form"
       width="283px"
       height="100vh"
       bg="#FFFFFF"
@@ -24,41 +25,37 @@ export function SideBar() {
       fontWeight="600"
       color="#8886A5"
     >
-      <Link href="/dashboard">
-        <Flex align="center" mt="20px">
-          <Icon as={FiSkipBack} />
+      {/* <Icon as={FiSkipBack} /> */}
+      <Flex alignItems="center" cursor="pointer">
+        <Icon as={FiSkipBack} />
+        <Link href="/dashboard">
           <Text ml="8px">Home</Text>
-        </Flex>
-      </Link>
+        </Link>
+      </Flex>
+
       <Stack spacing="12" alignItems="flex-start" pt="163px">
-        <Flex alignItems="center">
-          <Link href="/productsList" display="flex" alignItems="center">
-            <Icon as={FiPackage} />
+        <Flex alignItems="center" cursor="pointer">
+          <Icon as={FiPackage} />
+          <Link href="/productsList">
             <Text ml="16px">Products</Text>
           </Link>
         </Flex>
-        <Flex alignItems="center">
-          <Link href="/customers" display="flex" alignItems="center">
-            <Icon as={FiUsers} />
+        <Flex alignItems="center" cursor="pointer">
+          <Icon as={FiUsers} />
+          <Link href="/customers">
             <Text ml="16px">Customers</Text>
           </Link>
         </Flex>
-        <Flex alignItems="center">
-          <Link href="/orders" display="flex" alignItems="center">
-            <Icon as={FiShoppingBag} />
+        <Flex alignItems="center" cursor="pointer">
+          <Icon as={FiShoppingBag} />
+          <Link href="/orders">
             <Text ml="16px">Orders</Text>
           </Link>
         </Flex>
-        <Flex alignItems="center">
-          <Link href="/cart" display="flex" alignItems="center">
-            <Icon as={FiShoppingCart} />
+        <Flex alignItems="center" cursor="pointer">
+          <Icon as={FiShoppingCart} />
+          <Link href="/cart">
             <Text ml="16px">Cart</Text>
-          </Link>
-        </Flex>
-        <Flex alignItems="center">
-          <Link href="/" display="flex" alignItems="center">
-            <Icon as={BiLogOut} />
-            <Text ml="16px">SignOut</Text>
           </Link>
         </Flex>
       </Stack>

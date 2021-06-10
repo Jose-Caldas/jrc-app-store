@@ -5,7 +5,7 @@ import { api } from "./api";
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext, Product } from "../context/AuthContext";
 
 import create from "zustand";
 
@@ -21,11 +21,11 @@ export default function ProductsList() {
   const bears = useStore((state) => state.bears);
 
   const onAddToCart = useStore((state) => state.addToCart);
-  console.log(onAddToCart);
-
-  const cart = useStore((state) => state.cart);
 
   const { getProducts } = useContext(AuthContext);
+
+  const cart = useStore((state) => state.cart);
+  console.log(cart);
 
   const { isLoading, error, data, isFetching } = useQuery(
     "product",

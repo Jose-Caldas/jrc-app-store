@@ -1,8 +1,9 @@
-import { Flex, Text, Box, Button, Link } from "@chakra-ui/react";
+import { Flex, Text, Box, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { SideBar } from "../components/SideBar";
 import { useStore } from "./productsList";
+import Link from "next/link";
 
 export default function Cart() {
   const { formState } = useForm();
@@ -33,11 +34,16 @@ export default function Cart() {
           >
             {cart.length === 0
               ? "Lista Vazia"
-              : cart.map((product) => <p key={product._id}>{product.name}</p>)}
+              : cart.map((product) => (
+                  <>
+                    <p key={product._id}>{product.name}</p>
+                    <p>produto</p>
+                  </>
+                ))}
           </Text>
         </Box>
         <Flex justify="flex-end" mt="46px">
-          <Link href="/orders" _hover={{ border: "none" }}>
+          <Link href="/orders">
             <Button
               type="submit"
               colorScheme="blue"

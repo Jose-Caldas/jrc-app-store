@@ -14,7 +14,6 @@ export default function Dashboard({ loggedUser }: { loggedUser: User }) {
   }, [loggedUser]);
   return (
     <Flex>
-      <CartLink />
       <SideBar />
       <Flex flex="1" flexDirection="column" mt="131px" p="30px">
         <Text fontSize="40px" fontWeight="600" mb="22px">

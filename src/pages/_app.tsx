@@ -5,7 +5,6 @@ import { theme } from "../styles/theme";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { AuthProvider } from "../context/AuthContext";
-import { LoginProvider } from "../context/LoginContext";
 
 const queryClient = new QueryClient();
 

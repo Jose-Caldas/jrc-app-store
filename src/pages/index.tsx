@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect } from "react";
-import { APP_TOKEN, AuthContext, User } from "../context/AuthContext";
+import { useContext } from "react";
+import { APP_TOKEN, AuthContext } from "../context/AuthContext";
 import nookies from "nookies";
 
 type SignInFormData = {

@@ -6,7 +6,6 @@ import { SideBar } from "../components/SideBar";
 export default function Orders() {
   return (
     <Flex>
-      <CartLink />
       <SideBar />
       <Flex flexDirection="column" mt="131px">
         <Text fontSize="30px" fontWeight="600" mb="22px">
