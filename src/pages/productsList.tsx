@@ -12,26 +12,18 @@ import create from "zustand";
 export const useStore = create((set) => ({
   bears: 0,
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  decreasePopulation: () => set((state) => ({ bears: state.bears - 1 })),
   removeAllBears: () => set({ bears: 0 }),
+  cart: [],
+  addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
 }));
 
-// export type Product = {
-//   _id?: string;
-//   name: string;
-//   price: number;
-//   total?: number;
-// };
-
-// export async function getProducts(): Promise<Product[]> {
-//   const response = await api.get("/product");
-
-//   return response.data.products;
-// }
-
-export default function Products() {
+export default function ProductsList() {
   const bears = useStore((state) => state.bears);
-  console.log(bears);
+
+  const onAddToCart = useStore((state) => state.addToCart);
+  console.log(onAddToCart);
+
+  const cart = useStore((state) => state.cart);
 
   const { getProducts } = useContext(AuthContext);
 
@@ -39,7 +31,6 @@ export default function Products() {
     "product",
     getProducts
   );
-  console.log(data);
 
   return (
     <Flex>
@@ -69,20 +60,14 @@ export default function Products() {
           <Flex wrap="wrap">
             {data.map((product) => {
               return (
-                <Flex key={product._id} flexDirection="column" justify="center">
+                <Flex
+                  key={product._id}
+                  flexDirection="column"
+                  justify="center"
+                  m="0 auto"
+                >
                   <ProductItem name={product.name} price={product.price} />
-
-                  <Link href="/cart" _hover={{ border: "none" }}>
-                    <Button
-                      type="submit"
-                      colorScheme="blue"
-                      width="267px"
-                      isLoading={isLoading}
-                      borderTopRadius="none"
-                    >
-                      Add to cart
-                    </Button>
-                  </Link>
+                  <button onClick={onAddToCart}>Add to cart</button>
                 </Flex>
               );
             })}

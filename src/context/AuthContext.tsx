@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { api } from "../pages/api";
 import Router from "next/router";
 import { setCookie, parseCookies } from "nookies";
@@ -12,6 +19,7 @@ type AuthContextData = {
   SignIn(credentials: SignInCredentials): Promise<void>;
   user: User;
   getProducts: () => Promise<Product[]>;
+  setUser: Dispatch<SetStateAction<User>>;
 };
 
 type AuthProviderProps = {
@@ -42,12 +50,12 @@ export interface Product {
   updatedAt: string;
   __v: number;
 }
+export const APP_TOKEN = "appstore.token";
 
 export const AuthContext = createContext({} as AuthContextData);
 
 export async function getProducts(): Promise<Product[]> {
   const response = await api.get<Root>("/product");
-  // console.log(response.data);
 
   return response.data.products;
 }
@@ -75,7 +83,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       Router.push("/dashboard");
 
-      setCookie(undefined, "appstore.token", token, {
+      setCookie(undefined, APP_TOKEN, token, {
         maxAge: 60 * 60 * 24 * 30, //30days
         path: "/",
       });
@@ -85,7 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   return (
-    <AuthContext.Provider value={{ SignIn, user, getProducts }}>
+    <AuthContext.Provider value={{ SignIn, user, getProducts, setUser }}>
       {children}
     </AuthContext.Provider>
   );

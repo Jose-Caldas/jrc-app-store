@@ -32,7 +32,7 @@ export function SideBar() {
       </Link>
       <Stack spacing="12" alignItems="flex-start" pt="163px">
         <Flex alignItems="center">
-          <Link href="/products" display="flex" alignItems="center">
+          <Link href="/productsList" display="flex" alignItems="center">
             <Icon as={FiPackage} />
             <Text ml="16px">Products</Text>
           </Link>

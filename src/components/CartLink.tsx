@@ -2,8 +2,10 @@ import { Button } from "@chakra-ui/button";
 import Icon from "@chakra-ui/icon";
 import { Flex, Link } from "@chakra-ui/react";
 import { FiShoppingCart } from "react-icons/fi";
+import { useRouter } from "next/router";
 
 export function CartLink() {
+  const router = useRouter();
   return (
     <Flex>
       <Flex
@@ -21,15 +23,9 @@ export function CartLink() {
       >
         0
       </Flex>
-      <Link
-        href="/cart"
-        position="absolute"
-        top="50px"
-        right="50px"
-        _hover={{ color: "#577BF9" }}
-      >
+      <button onClick={() => router.push("/cart")}>
         <Icon as={FiShoppingCart} fontSize="25px" />
-      </Link>
+      </button>
     </Flex>
   );
 }

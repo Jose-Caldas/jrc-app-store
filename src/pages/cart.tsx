@@ -1,21 +1,14 @@
-import { Flex, Text, Box, Button, Link, Icon } from "@chakra-ui/react";
-import { useContext } from "react";
+import { Flex, Text, Box, Button, Link } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-import { CartLink } from "../components/CartLink";
 import { SideBar } from "../components/SideBar";
-import { AuthContext } from "../context/AuthContext";
-import { useStore } from "./products";
+import { useStore } from "./productsList";
 
 export default function Cart() {
-  const bears = useStore((state) => state.bears);
-
-  const increasePopulation = useStore((state) => state.increasePopulation);
-  const decreasePopulation = useStore((state) => state.decreasePopulation);
-  const removeAllBears = useStore((state) => state.removeAllBears);
-
   const { formState } = useForm();
+  const router = useRouter();
+
+  const cart = useStore((state) => state.cart);
 
   return (
     <Flex position="relative">
@@ -32,23 +25,16 @@ export default function Cart() {
           justifyContent="space-between"
           p="20px"
         >
-          <Flex align="center">
-            <Text fontSize="20px">Shoes</Text>
-
-            <Flex justify="space-evenly" width="100%" align="center" px="60px">
-              <Button onClick={() => decreasePopulation()} bg="transparent">
-                <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
-              </Button>
-              {bears}
-              <Button onClick={() => increasePopulation()} bg="transparent">
-                <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-              </Button>
-              <Button onClick={() => removeAllBears()} bg="transparent">
-                <Icon as={AiOutlineCloseCircle} color="red" fontSize="20px" />
-              </Button>
-            </Flex>
-            <Text>42</Text>
-          </Flex>
+          <Text
+            id="Product-list"
+            p="10px"
+            borderBottom="1px"
+            borderColor="gray.200"
+          >
+            {cart.length === 0
+              ? "Lista Vazia"
+              : cart.map((product) => <p key={product._id}>{product.name}</p>)}
+          </Text>
         </Box>
         <Flex justify="flex-end" mt="46px">
           <Link href="/orders" _hover={{ border: "none" }}>
@@ -63,7 +49,8 @@ export default function Cart() {
           </Link>
         </Flex>
       </Flex>
-      <CartLink />
+
+      <button onClick={() => router.push("/cart")}>cart</button>
     </Flex>
   );
 }

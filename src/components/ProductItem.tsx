@@ -1,7 +1,7 @@
 import { Box, Text, Flex, Button, Link, Icon } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { CartLink } from "./CartLink";
-import { useStore } from "../pages/products";
+import { useStore } from "../pages/productsList";
 
 import { numberFormat } from "../utils/numberFormat";
 import { useState } from "react";
@@ -23,7 +23,6 @@ export function ProductItem({ name, price }) {
         mr="8"
         mt="8"
       >
-        <CartLink />
         <Flex flexDirection="column">
           <Text textAlign="center" fontSize="24px" fontWeight="600" mt="20px">
             {name}

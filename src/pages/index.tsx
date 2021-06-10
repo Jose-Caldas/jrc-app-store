@@ -5,10 +5,9 @@ import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { SideBar } from "../components/SideBar";
-import { LoginContext } from "../context/LoginContext";
+import { useContext, useEffect } from "react";
+import { APP_TOKEN, AuthContext, User } from "../context/AuthContext";
+import nookies from "nookies";
 
 type SignInFormData = {
   email: string;
@@ -25,7 +24,7 @@ export default function SignIn() {
     resolver: yupResolver(SignInFormSchema),
   });
 
-  const { SignIn, user } = useContext(AuthContext);
+  const { SignIn } = useContext(AuthContext);
 
   const handleSignIn = async (values: SignInFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -57,7 +56,6 @@ export default function SignIn() {
 
         <Stack spacing="4">
           <Input
-            className="password"
             name="email"
             type="email"
             label="E-mail"
@@ -87,4 +85,59 @@ export default function SignIn() {
       </Flex>
     </Flex>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+
+  const token = cookies[APP_TOKEN];
+
+  try {
+    if (token) {
+      const response = await fetch(
+        "https://e-commerce-b4.herokuapp.com/graphql",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            Authorization: token,
+          },
+          body: JSON.stringify({
+            query: `query Me{
+  me {
+    name
+    email
+  }
+}`,
+          }),
+        }
+      );
+
+      const user = await response.json();
+
+      if (!user) {
+        return {
+          props: { loggedUser: null },
+        };
+      }
+
+      ctx.res.writeHead(307, { Location: "/dashboard" });
+      ctx.res.end();
+
+      return {
+        props: {
+          loggedUser: user.data.me,
+        },
+      };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  return {
+    props: {
+      loggedUser: null,
+    },
+  };
 }
