@@ -12,6 +12,7 @@ import create from "zustand";
 export const useStore = create((set) => ({
   bears: 0,
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+  decreasePopulation: () => set((state) => ({ bears: state.bears - 1 })),
   removeAllBears: () => set({ bears: 0 }),
 }));
 
@@ -28,7 +29,7 @@ export const useStore = create((set) => ({
 //   return response.data.products;
 // }
 
-export default function ProductsList() {
+export default function Products() {
   const bears = useStore((state) => state.bears);
   console.log(bears);
 
@@ -68,12 +69,7 @@ export default function ProductsList() {
           <Flex wrap="wrap">
             {data.map((product) => {
               return (
-                <Flex
-                  key={product._id}
-                  flexDirection="column"
-                  justify="center"
-                  m="0 auto"
-                >
+                <Flex key={product._id} flexDirection="column" justify="center">
                   <ProductItem name={product.name} price={product.price} />
 
                   <Link href="/cart" _hover={{ border: "none" }}>

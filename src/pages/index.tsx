@@ -55,6 +55,7 @@ export default function SignIn() {
 
         <Stack spacing="4">
           <Input
+            className="password"
             name="email"
             type="email"
             label="E-mail"
