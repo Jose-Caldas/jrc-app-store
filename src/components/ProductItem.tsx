@@ -6,8 +6,9 @@ import { useStore } from "../pages/productsList";
 import { numberFormat } from "../utils/numberFormat";
 import { useState } from "react";
 
-export function ProductItem({ name, price }) {
+export function ProductItem({ name, price, _id }) {
   const increasePopulation = useStore((state) => state.increasePopulation);
+  const onRemoveToCart = useStore((state) => state.removeFromCart);
 
   return (
     <Flex>
@@ -39,7 +40,7 @@ export function ProductItem({ name, price }) {
         </Flex>
         <Flex bg="gray.300" height="50px">
           <Flex justify="space-evenly" width="100%" align="center">
-            <Button bg="transparent">
+            <Button bg="transparent" onClick={() => onRemoveToCart(_id)}>
               <Icon as={FiMinusCircle} color="#F97575" fontSize="20px" />
             </Button>
             <Button onClick={() => increasePopulation()} bg="transparent">

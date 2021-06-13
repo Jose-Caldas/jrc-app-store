@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { api } from "./api/index";
 
 type RegistrationFormData = {
   name: string;
@@ -34,8 +35,25 @@ export default function Registration() {
 
   const { errors } = formState;
 
-  const handleRegisterUser = async (values: RegistrationFormData) => {
+  const handleRegisterUser = async ({
+    password,
+    name,
+    gender,
+    surname,
+    email,
+  }: RegistrationFormData) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await api.post("/user", {
+        password,
+        name,
+        gender,
+        surname,
+        email,
+      });
+
+      console.log(response);
+    } catch (e) {}
   };
 
   return (

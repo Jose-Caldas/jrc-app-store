@@ -1,20 +1,45 @@
-import { Flex, Spinner, Text, Button, Link } from "@chakra-ui/react";
+import { Flex, Spinner, Text } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-import { api } from "./api";
 
 import { ProductItem } from "../components/ProductItem";
 import { SideBar } from "../components/SideBar";
 import { useContext } from "react";
-import { AuthContext, Product } from "../context/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 import create from "zustand";
+import nookies from "nookies";
+import { setCookie } from "nookies";
+
+// pegar o valor inicial dos cookies
 
 export const useStore = create((set) => ({
   bears: 0,
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
   removeAllBears: () => set({ bears: 0 }),
   cart: [],
-  addToCart: (item) => set((state) => ({ cart: [...state.cart, item] })),
+  recoverFromLocalStorage: (items) => set(() => ({ cart: items })),
+
+  addToCart: (item) =>
+    set((state) => {
+      setCookie(
+        undefined,
+        "cart",
+        JSON.stringify({ cart: [...state.cart, item] }),
+        {
+          maxAge: 60 * 60 * 24 * 30, //30days
+          path: "/",
+        }
+      );
+
+      return { cart: [...state.cart, item] };
+    }),
+  removeFromCart: (id) => {
+    return set((state) => {
+      const remove = state.cart.filter((item) => item._id !== id);
+
+      return { cart: remove };
+    });
+  },
 }));
 
 export default function ProductsList() {
@@ -24,8 +49,7 @@ export default function ProductsList() {
 
   const { getProducts } = useContext(AuthContext);
 
-  const cart = useStore((state) => state.cart);
-  console.log(cart);
+  const cart = useStore((state) => state.data);
 
   const { isLoading, error, data, isFetching } = useQuery(
     "product",
@@ -66,8 +90,14 @@ export default function ProductsList() {
                   justify="center"
                   m="0 auto"
                 >
-                  <ProductItem name={product.name} price={product.price} />
-                  <button onClick={onAddToCart}>Add to cart</button>
+                  <ProductItem
+                    _id={product._id}
+                    name={product.name}
+                    price={product.price}
+                  />
+                  <button onClick={() => onAddToCart(product)}>
+                    Add to cart
+                  </button>
                 </Flex>
               );
             })}

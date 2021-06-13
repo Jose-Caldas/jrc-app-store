@@ -38,10 +38,6 @@ export default function Customers() {
     }
   );
 
-  // if (!data?.length) {
-  //   return <p>Loading</p>;
-  // }
-
   return (
     <Flex flex="1" w="100vw">
       <SideBar />

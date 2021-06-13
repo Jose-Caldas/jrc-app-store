@@ -27,7 +27,6 @@ export default function SignIn() {
   const { SignIn } = useContext(AuthContext);
 
   const handleSignIn = async (values: SignInFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     return SignIn(values);
   };
 

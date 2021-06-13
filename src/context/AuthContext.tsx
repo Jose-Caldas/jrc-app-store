@@ -25,7 +25,7 @@ type AuthProviderProps = {
   children: ReactNode;
 };
 
-export interface Customer {
+export interface UserProps {
   user: User;
   token: string;
 }
@@ -36,7 +36,7 @@ export interface User {
   name: string;
 }
 
-export interface Root {
+export interface ProductProps {
   products: Product[];
 }
 
@@ -54,7 +54,7 @@ export const APP_TOKEN = "appstore.token";
 export const AuthContext = createContext({} as AuthContextData);
 
 export async function getProducts(): Promise<Product[]> {
-  const response = await api.get<Root>("/product");
+  const response = await api.get<ProductProps>("/product");
 
   return response.data.products;
 }
@@ -65,7 +65,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function SignIn({ email, password }: SignInCredentials) {
     try {
-      const response = await api.post<Customer>("/login", {
+      const response = await api.post<UserProps>("/login", {
         email,
         password,
       });
