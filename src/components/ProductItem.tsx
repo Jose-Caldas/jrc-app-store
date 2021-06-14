@@ -1,10 +1,8 @@
-import { Box, Text, Flex, Button, Link, Icon } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, Icon } from "@chakra-ui/react";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
-import { CartLink } from "./CartLink";
 import { useStore } from "../pages/productsList";
 
 import { numberFormat } from "../utils/numberFormat";
-import { useState } from "react";
 
 export function ProductItem({ name, price, _id }) {
   const increasePopulation = useStore((state) => state.increasePopulation);

@@ -1,4 +1,4 @@
-import { Flex, Text, Box, Button } from "@chakra-ui/react";
+import { Flex, Text, Box, Button, Icon } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { SideBar } from "../components/SideBar";
@@ -6,9 +6,12 @@ import { useStore } from "./productsList";
 import Link from "next/link";
 import { useEffect } from "react";
 import nookies from "nookies";
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
 export default function Cart() {
   const { formState } = useForm();
+  const onRemoveToCart = useStore((state) => state.removeFromCart);
+  const onAddToCart = useStore((state) => state.addToCart);
 
   const cart = useStore((state) => state.cart);
   const recoverFromLocalStorage = useStore(
@@ -48,8 +51,35 @@ export default function Cart() {
           {cart?.length === 0
             ? "Lista Vazia"
             : cart?.map((product) => (
-                <Flex key={product._id}>
-                  <Text>{product.name}</Text>
+                <Flex key={product._id} align="center">
+                  <Text w="267px" mx="60px">
+                    {product.name}
+                  </Text>
+                  <Flex justify="center" align="center" mr="30px">
+                    <Button
+                      w="50px"
+                      bg="transparent"
+                      onClick={() => onRemoveToCart(product._id)}
+                    >
+                      <Icon
+                        as={FiMinusCircle}
+                        color="#F97575"
+                        fontSize="20px"
+                      />
+                    </Button>
+                  </Flex>
+                  <Flex justify="center" align="center" mr="80px">
+                    <Button
+                      onClick={() => onAddToCart(product)}
+                      w="50px"
+                      bg="transparent"
+                    >
+                      <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                    </Button>
+                  </Flex>
+                  <Flex align="center" justify="center" w="60px">
+                    <Text textAlign="center">{product.price}</Text>
+                  </Flex>
                 </Flex>
               ))}
         </Box>

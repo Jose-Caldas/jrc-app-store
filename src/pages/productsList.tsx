@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 import create from "zustand";
-import nookies from "nookies";
 import { setCookie } from "nookies";
 
 // pegar o valor inicial dos cookies
@@ -88,7 +87,7 @@ export default function ProductsList() {
                   key={product._id}
                   flexDirection="column"
                   justify="center"
-                  m="0 auto"
+                  align="center"
                 >
                   <ProductItem
                     _id={product._id}
