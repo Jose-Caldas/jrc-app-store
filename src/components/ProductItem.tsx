@@ -5,6 +5,7 @@ import { useStore } from "../pages/productsList";
 import { numberFormat } from "../utils/numberFormat";
 
 export function ProductItem({ name, price, _id }) {
+  const bears = useStore((state) => state.bears);
   const increasePopulation = useStore((state) => state.increasePopulation);
   const onRemoveToCart = useStore((state) => state.removeFromCart);
 
@@ -44,6 +45,7 @@ export function ProductItem({ name, price, _id }) {
             <Button onClick={() => increasePopulation()} bg="transparent">
               <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
             </Button>
+            {bears}
           </Flex>
         </Flex>
       </Box>

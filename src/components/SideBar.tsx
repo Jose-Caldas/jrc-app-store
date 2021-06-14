@@ -26,7 +26,7 @@ export function SideBar() {
       color="#8886A5"
     >
       {/* <Icon as={FiSkipBack} /> */}
-      <Flex alignItems="center" cursor="pointer">
+      <Flex alignItems="center" cursor="pointer" mt="30px">
         <Icon as={FiSkipBack} />
         <Link href="/dashboard">
           <Text ml="8px">Home</Text>

@@ -1,4 +1,4 @@
-import { Flex, Spinner, Text } from "@chakra-ui/react";
+import { Flex, Spinner, Text, Button } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
 import { ProductItem } from "../components/ProductItem";
@@ -94,9 +94,9 @@ export default function ProductsList() {
                     name={product.name}
                     price={product.price}
                   />
-                  <button onClick={() => onAddToCart(product)}>
-                    Add to cart
-                  </button>
+                  <Button onClick={() => onAddToCart(product)}>
+                    <Text mr="10px">Add to cart</Text>
+                  </Button>
                 </Flex>
               );
             })}

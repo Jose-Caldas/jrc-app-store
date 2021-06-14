@@ -1,4 +1,19 @@
-import { Flex, Text, Box, Button, Icon } from "@chakra-ui/react";
+import {
+  Flex,
+  Text,
+  Box,
+  Button,
+  Icon,
+  HStack,
+  Grid,
+  GridItem,
+  Table,
+  Thead,
+  Th,
+  Tr,
+  Tbody,
+  Td,
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { SideBar } from "../components/SideBar";
@@ -7,9 +22,11 @@ import Link from "next/link";
 import { useEffect } from "react";
 import nookies from "nookies";
 import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
+import { numberFormat } from "../utils/numberFormat";
 
 export default function Cart() {
   const { formState } = useForm();
+
   const onRemoveToCart = useStore((state) => state.removeFromCart);
   const onAddToCart = useStore((state) => state.addToCart);
 
@@ -33,6 +50,9 @@ export default function Cart() {
     }
   }, []);
 
+  // const total = cart.reduce((acc, price) => acc + price);
+  // console.log(total);
+
   return (
     <Flex>
       <SideBar />
@@ -47,41 +67,74 @@ export default function Cart() {
           bg="#FFFFFF"
           justifyContent="space-between"
           p="20px"
+          boxShadow="lg"
+          borderRadius="8px"
         >
-          {cart?.length === 0
-            ? "Lista Vazia"
-            : cart?.map((product) => (
-                <Flex key={product._id} align="center">
-                  <Text w="267px" mx="60px">
-                    {product.name}
-                  </Text>
-                  <Flex justify="center" align="center" mr="30px">
-                    <Button
-                      w="50px"
-                      bg="transparent"
-                      onClick={() => onRemoveToCart(product._id)}
-                    >
-                      <Icon
-                        as={FiMinusCircle}
-                        color="#F97575"
-                        fontSize="20px"
-                      />
-                    </Button>
-                  </Flex>
-                  <Flex justify="center" align="center" mr="80px">
-                    <Button
-                      onClick={() => onAddToCart(product)}
-                      w="50px"
-                      bg="transparent"
-                    >
-                      <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
-                    </Button>
-                  </Flex>
-                  <Flex align="center" justify="center" w="60px">
-                    <Text textAlign="center">{product.price}</Text>
-                  </Flex>
-                </Flex>
-              ))}
+          <Table>
+            <Thead>
+              <Tr color="white" bg="#8886A5">
+                <Th color="white">Item</Th>
+                <Th textAlign="center" color="white">
+                  Remove
+                </Th>
+                <Th textAlign="center" color="white">
+                  Add
+                </Th>
+                <Th textAlign="center" color="white">
+                  Quantity
+                </Th>
+                <Th textAlign="center" color="white">
+                  Total
+                </Th>
+              </Tr>
+            </Thead>
+            {cart?.length === 0 ? (
+              <Text mt="30px">Lista vazia</Text>
+            ) : (
+              cart.map((product) => (
+                <Tbody color="#8886A5">
+                  <Tr key={product._id}>
+                    <Td w="290px">{product.name}</Td>
+                    <Td textAlign="center">
+                      <Button
+                        bg="transparent"
+                        onClick={() => onRemoveToCart(product._id)}
+                      >
+                        <Icon
+                          as={FiMinusCircle}
+                          color="#F97575"
+                          fontSize="20px"
+                        />
+                      </Button>
+                    </Td>
+                    <Td textAlign="center">
+                      <Button
+                        onClick={() => onAddToCart(product)}
+                        bg="transparent"
+                      >
+                        <Icon
+                          as={FiPlusCircle}
+                          color="#577BF9"
+                          fontSize="20px"
+                        />
+                      </Button>
+                    </Td>
+                    <Td textAlign="center">
+                      <Text>0</Text>
+                    </Td>
+                    <Td textAlign="center" color="#8886A5">
+                      <Text>{numberFormat.format(product.price)}</Text>
+                    </Td>
+                  </Tr>
+                </Tbody>
+              ))
+            )}
+          </Table>
+
+          <Flex justify="space-between" fontSize="30px" mt="30px">
+            <Text>Total</Text>
+            <Text>{numberFormat.format(0)}</Text>
+          </Flex>
         </Box>
         <Flex justify="flex-end" mt="46px">
           <Link href="/orders">
