@@ -35,13 +35,17 @@ export default function Cart() {
     (state) => state.recoverFromLocalStorage
   );
 
+  const total = cart?.reduce((acc, item) => {
+    return acc + item.price;
+  }, 0);
+
   // Set o cookie em forma serializavel
   // Pegar o cookie e voltar para o tipo primitivo
 
   useEffect(() => {
     try {
       const products = nookies.get()?.cart;
-      console.log(products);
+      // console.log(products);
 
       return recoverFromLocalStorage(JSON.parse(products)?.cart);
     } catch (e) {
@@ -49,9 +53,6 @@ export default function Cart() {
       return [];
     }
   }, []);
-
-  // const total = cart.reduce((acc, price) => acc + price);
-  // console.log(total);
 
   return (
     <Flex>
@@ -88,52 +89,42 @@ export default function Cart() {
                 </Th>
               </Tr>
             </Thead>
-            {cart?.length === 0 ? (
-              <Text mt="30px">Lista vazia</Text>
-            ) : (
-              cart.map((product) => (
-                <Tbody color="#8886A5">
-                  <Tr key={product._id}>
-                    <Td w="290px">{product.name}</Td>
-                    <Td textAlign="center">
-                      <Button
-                        bg="transparent"
-                        onClick={() => onRemoveToCart(product._id)}
-                      >
-                        <Icon
-                          as={FiMinusCircle}
-                          color="#F97575"
-                          fontSize="20px"
-                        />
-                      </Button>
-                    </Td>
-                    <Td textAlign="center">
-                      <Button
-                        onClick={() => onAddToCart(product)}
-                        bg="transparent"
-                      >
-                        <Icon
-                          as={FiPlusCircle}
-                          color="#577BF9"
-                          fontSize="20px"
-                        />
-                      </Button>
-                    </Td>
-                    <Td textAlign="center">
-                      <Text>0</Text>
-                    </Td>
-                    <Td textAlign="center" color="#8886A5">
-                      <Text>{numberFormat.format(product.price)}</Text>
-                    </Td>
-                  </Tr>
-                </Tbody>
-              ))
-            )}
+            {cart.map((product) => (
+              <Tbody color="#8886A5" key={product._id}>
+                <Tr>
+                  <Td w="290px">{product.name}</Td>
+                  <Td textAlign="center">
+                    <Button
+                      bg="transparent"
+                      onClick={() => onRemoveToCart(product._id)}
+                    >
+                      <Icon
+                        as={FiMinusCircle}
+                        color="#F97575"
+                        fontSize="20px"
+                      />
+                    </Button>
+                  </Td>
+                  <Td textAlign="center">
+                    <Button
+                      onClick={() => onAddToCart(product)}
+                      bg="transparent"
+                    >
+                      <Icon as={FiPlusCircle} color="#577BF9" fontSize="20px" />
+                    </Button>
+                  </Td>
+                  <Td textAlign="center">0</Td>
+                  <Td textAlign="center" color="#8886A5">
+                    {numberFormat.format(product.price)}
+                  </Td>
+                </Tr>
+              </Tbody>
+            ))}
           </Table>
 
           <Flex justify="space-between" fontSize="30px" mt="30px">
             <Text>Total</Text>
-            <Text>{numberFormat.format(0)}</Text>
+            <Text>{numberFormat.format(parseInt(total))}</Text>
           </Flex>
         </Box>
         <Flex justify="flex-end" mt="46px">
